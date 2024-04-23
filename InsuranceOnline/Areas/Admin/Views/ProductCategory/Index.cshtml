@@ -1,0 +1,74 @@
+﻿@model PagedList.PagedList<Insurance.Data.Models.ProductCategory>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section header{
+    Danh mục sản phẩm
+}
+
+<div class="card mb-4">
+    <div class="panel-body mt-3 ms-3">
+        @using (Html.BeginForm("Index", "ProductCategory", FormMethod.Get))
+        {
+            <div class="form-group">
+                <div class="col-lg-12 d-flex">
+                    <div class="col-md-4">
+                        <input type="text" value="@ViewBag.SearchString" class="form-control" name="searchString" />
+                    </div>
+                    <div class="col-md-4">
+                        <button type="submit" class="btn btn-success">Tìm kiếm</button>
+                        <a class="btn btn-primary" href="/Admin/ProductCategory/Create">Thêm mới</a>
+                    </div>
+                </div>
+            </div>
+        }
+        <table id="datatablesSimple">
+            <thead>
+                <tr>
+                    <th>Tên danh mục</th>
+                    <th>Thứ tự</th>
+                    <th>Tiêu đề SEO</th>
+                    <th>Trạng thái</th>
+                    <th>Hiển thị</th>
+                    <th>Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr id="row_@item.ID">
+                        <td>@item.Name</td>
+                        <td>@item.DisplayOrder</td>
+                        <td>@item.Alias</td>
+                        <td><a href="#" class="btn-active" data-id="@item.ID">@Html.Raw(item.Status == 1 ? "<strong>Kích hoạt</strong>" : "Khoá")</a></td>
+                        <td>
+                            @if (item.HomeFlag == true)
+                            {
+                                <span class="badge bg-success">Hiển thị</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-danger">Ẩn</span>
+                            }
+                        </td>
+                        <td>
+                            <a href="/Admin/ProductCategory/Edit/@item.ID">Sửa</a>
+                            |
+                            @Ajax.ActionLink("Xoá", "Delete", new { @id = @item.ID }, new AjaxOptions
+                       {
+                           Confirm = "Bạn có muốn xoá bản ghi này?",
+                           OnComplete = "$('#row_" + @item.ID + "').remove()",
+                           HttpMethod = "Delete"
+                       })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+    </div>
+</div>
+

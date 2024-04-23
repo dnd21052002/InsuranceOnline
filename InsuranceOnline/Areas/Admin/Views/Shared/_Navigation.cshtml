@@ -1,0 +1,54 @@
+﻿@using InsuranceOnline.Areas.Admin.Models;
+@using Common;
+<div id="layoutSidenav_nav">
+    <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+        <div class="sb-sidenav-menu">
+            <div class="nav">
+                <a class="nav-link" href="/Admin/Home/Index">
+                    <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                    Trang chủ
+                </a>
+                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts1" aria-expanded="false" aria-controls="collapseLayouts1">
+                    <div class="sb-nav-link-icon"><i class="fa-regular fa-user"></i></div>
+                        Tài khoản
+                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                </a>
+                <div class="collapse" id="collapseLayouts1" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                    <nav class="sb-sidenav-menu-nested nav">
+                        <a class="nav-link" href="/Admin/UserGroup/Index">Tài khoản hệ thống</a>
+                        <a class="nav-link" href="/Admin/User/Index">Tài khoản khách hàng</a>
+                    </nav>
+                </div>
+                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts2" aria-expanded="false" aria-controls="collapseLayouts2">
+                    <div class="sb-nav-link-icon"><i class="fa-regular fa-newspaper"></i></div>
+                    Tin tức
+                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                </a>
+                <div class="collapse" id="collapseLayouts2" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                    <nav class="sb-sidenav-menu-nested nav">
+                        <a class="nav-link" href="/Admin/Category/Index">Danh mục tin</a>
+                        <a class="nav-link" href="/Admin/Content/Index">Tin tức</a>
+                    </nav>
+                </div>
+                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts3" aria-expanded="false" aria-controls="collapseLayouts3">
+                    <div class="sb-nav-link-icon"><i class="fa-regular fa-bell"></i></div>
+                    Sản phẩm
+                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                </a>
+                <div class="collapse" id="collapseLayouts3" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                    <nav class="sb-sidenav-menu-nested nav">
+                        <a class="nav-link" href="/Admin/ProductCategory/Index">Danh mục sản phẩm</a>
+                        <a class="nav-link" href="/Admin/Product/Index">Sản phẩm</a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        @{
+            var user = (UserLogin)Session[CommonConstants.ADMIN_SESSION];
+        }
+        @if (user == null)
+        {
+            return;
+        }
+    </nav>
+</div>
