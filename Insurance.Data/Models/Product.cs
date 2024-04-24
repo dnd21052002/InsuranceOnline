@@ -51,6 +51,6 @@ namespace Insurance.Data.Models
         public virtual ProductCategory ProductCategory { set; get; }
 
         public virtual IEnumerable<OrderDetail> OrderDetails { set; get; }
-        public int Status { set; get; }
+        public bool Status { set; get; }
     }
 }

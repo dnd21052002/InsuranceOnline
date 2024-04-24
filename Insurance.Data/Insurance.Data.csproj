@@ -61,6 +61,14 @@
     <Compile Include="Migrations\202404231536422_initialInsuranceDb.Designer.cs">
       <DependentUpon>202404231536422_initialInsuranceDb.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202404240150108_changeProductCate.cs" />
+    <Compile Include="Migrations\202404240150108_changeProductCate.designer.cs">
+      <DependentUpon>202404240150108_changeProductCate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202404240250074_updateStatus.cs" />
+    <Compile Include="Migrations\202404240250074_updateStatus.designer.cs">
+      <DependentUpon>202404240250074_updateStatus.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AdminUser.cs" />
     <Compile Include="Models\Cart.cs" />
@@ -79,6 +87,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202404231536422_initialInsuranceDb.resx">
       <DependentUpon>202404231536422_initialInsuranceDb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202404240150108_changeProductCate.resx">
+      <DependentUpon>202404240150108_changeProductCate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202404240250074_updateStatus.resx">
+      <DependentUpon>202404240250074_updateStatus.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
