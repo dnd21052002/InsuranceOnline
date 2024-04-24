@@ -15,8 +15,8 @@
         {
             <div class="form-group">
                 <div class="col-lg-12 d-flex">
-                    <div class="col-md-4">
-                        <input type="text" value="@ViewBag.SearchString" class="form-control" name="searchString" />
+                    <div class="col-md-4 me-2">
+                        <input type="text" placeholder="từ khoá tìm kiếm..." value="@ViewBag.SearchString" class="form-control" name="searchString" />
                     </div>
                     <div class="col-md-4">
                         <button type="submit" class="btn btn-success">Tìm kiếm</button>
@@ -29,11 +29,12 @@
             <thead>
                 <tr>
                     <th>Tên danh mục</th>
-                    <th>Thứ tự</th>
-                    <th>Tiêu đề SEO</th>
+                    <th>Mô tả</th>
+                    <th style="width: 8%">Thứ tự</th>
+                    <th>Alias</th>
                     <th>Trạng thái</th>
                     <th>Hiển thị</th>
-                    <th>Thao tác</th>
+                    <th style="width: 10%">Thao tác</th>
                 </tr>
             </thead>
             <tbody>
@@ -41,9 +42,19 @@
                 {
                     <tr id="row_@item.ID">
                         <td>@item.Name</td>
+                        <td>@item.Description</td>
                         <td>@item.DisplayOrder</td>
                         <td>@item.Alias</td>
-                        <td><a href="#" class="btn-active" data-id="@item.ID">@Html.Raw(item.Status == 1 ? "<strong>Kích hoạt</strong>" : "Khoá")</a></td>
+                        <td>
+                            @if (item.Status == true)
+                            {
+                                <span class="badge bg-success">Kích hoạt</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-danger">Khoá</span>
+                            }
+                        </td>
                         <td>
                             @if (item.HomeFlag == true)
                             {
@@ -55,14 +66,10 @@
                             }
                         </td>
                         <td>
-                            <a href="/Admin/ProductCategory/Edit/@item.ID">Sửa</a>
+                            <a class="text-warning" href="/Admin/ProductCategory/Edit/@item.ID"><i class="fas fa-pencil-alt"></i></a>
                             |
-                            @Ajax.ActionLink("Xoá", "Delete", new { @id = @item.ID }, new AjaxOptions
-                       {
-                           Confirm = "Bạn có muốn xoá bản ghi này?",
-                           OnComplete = "$('#row_" + @item.ID + "').remove()",
-                           HttpMethod = "Delete"
-                       })
+                            <a id="deleteBtn" class="text-danger" href="#" data-id="@item.ID"><i class="fas fa-trash-alt"></i></a>
+                            
                         </td>
                     </tr>
                 }
@@ -72,3 +79,20 @@
     </div>
 </div>
 
+<script>
+    $('#deleteBtn').on('click', function (e) {
+        e.preventDefault();
+        var id = $(this).data('id');
+        if (confirm('Bạn có chắc chắn muốn xóa không?')) {
+            $.ajax({
+                url: '/Admin/ProductCategory/Delete/' + id,
+                type: 'POST',
+                success: function (data) {
+                    $('#row_' + id).remove();
+                    //cập nhật lại trang
+                    location.reload();
+                }
+            });
+        }
+    });
+</script>
