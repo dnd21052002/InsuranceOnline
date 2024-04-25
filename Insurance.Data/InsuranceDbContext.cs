@@ -23,6 +23,7 @@ namespace Insurance.Data
         public DbSet<ProductCategory> ProductCategories { get; set; }
         public DbSet<Order> Orders { set; get; }
         public DbSet<OrderDetail> OrderDetails { set; get; }
+        public DbSet<ProductCustomer> ProductCustomers { set; get; }
 
         public static InsuranceDbContext Create()
         {

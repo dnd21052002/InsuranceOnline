@@ -47,10 +47,15 @@ namespace Insurance.Data.Models
         public bool? HotFlag { set; get; }
         public int? ViewCount { set; get; }
 
+        //0 là tháng, 1 là năm
+        public int ExpireType { set; get; }
+
+        public int ExpireTime { set; get; }
+
         [ForeignKey("CategoryID")]
         public virtual ProductCategory ProductCategory { set; get; }
 
         public virtual IEnumerable<OrderDetail> OrderDetails { set; get; }
-        public int Status { set; get; }
+        public bool Status { set; get; }
     }
 }
