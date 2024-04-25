@@ -20,7 +20,7 @@ namespace Insurance.Data.Dao
 
         public List<ProductCategory> ListAll()
         {
-            return db.ProductCategories.Where(x => x.Status == 1).OrderBy(x => x.DisplayOrder).ToList();
+            return db.ProductCategories.Where(x => x.Status).OrderBy(x => x.DisplayOrder).ToList();
         }
 
         public IEnumerable<ProductCategory> ListAllPaging(string searchString, int page, int pageSize)

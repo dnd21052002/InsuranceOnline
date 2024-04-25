@@ -16,18 +16,17 @@ namespace Insurance.Data.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { set; get; }
 
-        [Required]
+        [Required(ErrorMessage = "Tên danh mục không được để trống")]
         [MaxLength(256)]
         public string Name { set; get; }
-
-        [Required]
-        [MaxLength(256)]
         public string Alias { set; get; }
         public string Description { set; get; }
         public int? DisplayOrder { set; get; }
         public bool? HomeFlag { set; get; }
 
         public virtual IEnumerable<Product> Products { set; get; }
-        public int Status { set; get; }
+
+        [Required(ErrorMessage = "Phải chọn trạng thái")]
+        public bool Status { set; get; }
     }
 }
