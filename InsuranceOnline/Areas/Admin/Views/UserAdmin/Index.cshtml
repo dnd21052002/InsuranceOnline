@@ -1,0 +1,86 @@
+﻿@model PagedList.PagedList<Insurance.Data.Models.AdminUser>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@section header{
+    Tài khoản Admin
+}
+
+<div class="card mb-4">
+    <div class="panel-body mt-3 ms-3">
+        @using (Html.BeginForm("Index", "UserAdmin", FormMethod.Get))
+        {
+            <div class="form-group">
+                <div class="col-lg-12 d-flex">
+                    <div class="col-md-4 me-2">
+                        <input type="text" placeholder="từ khoá tìm kiếm..." value="@ViewBag.SearchString" class="form-control" name="searchString" />
+                    </div>
+                    <div class="col-md-4">
+                        <button type="submit" class="btn btn-success">Tìm kiếm</button>
+                        <a class="btn btn-primary" href="/Admin/UserAdmin/Create">Thêm mới</a>
+                    </div>
+                </div>
+            </div>
+        }
+        <table id="datatablesSimple">
+            <thead>
+                <tr>
+                    <th>Họ & Tên</th>
+                    <th>Tài khoản</th>
+                    <th>Mật khẩu</th>
+                    <th>Email</th>
+                    <th>Trạng thái</th>
+                    <th style="width: 10%">Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr id="row_@item.Id">
+                        <td>@item.FullName</td>
+                        <td>@item.Username</td>
+                        <td>@item.Password</td>
+                        <td>@item.Email</td>
+                        <td>
+                            @if (item.Status == 1)
+                            {
+                                <span class="badge bg-success">Kích hoạt</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-danger">Khoá</span>
+                            }
+                        </td>
+
+                        <td>
+                            <a class="text-warning" href="/Admin/UserAdmin/Edit/@item.Id"><i class="fas fa-pencil-alt"></i></a>
+                            |
+                            <a class="text-danger deleteBtn" href="#" data-id="@item.Id"><i class="fas fa-trash-alt"></i></a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+    </div>
+</div>
+
+<script>
+    $('.deleteBtn').on('click', function (e) {
+        e.preventDefault();
+        var id = $(this).data('id');
+        if (confirm('Bạn có chắc chắn muốn xóa không?')) {
+            $.ajax({
+                url: '/Admin/UserAdmin/Delete/' + id,
+                type: 'POST',
+                success: function (data) {
+                    $('#row_' + id).remove();
+                    //cập nhật lại trang
+                    location.reload();
+                }
+            });
+        }
+    });
+</script>

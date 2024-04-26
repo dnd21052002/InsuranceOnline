@@ -1,34 +1,32 @@
-﻿using Common;
-using Insurance.Data.Models;
+﻿using Insurance.Data.Models;
 using PagedList;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Insurance.Data.Dao
 {
-    public class AdminUserDao
+    public class CustomerUserDao
     {
         private InsuranceDbContext db = null;
 
-        public AdminUserDao()
+        public CustomerUserDao()
         {
             db = new InsuranceDbContext();
         }
 
-        public int Insert(AdminUser entity)
+        public int Insert(CustomerUser entity)
         {
-            db.AdminUsers.Add(entity);
+            db.CustomerUsers.Add(entity);
             db.SaveChanges();
             return entity.Id;
         }
 
         public int Login(string userName, string password)
         {
-            var result = db.AdminUsers.SingleOrDefault(x => x.Username == userName);
+            var result = db.CustomerUsers.SingleOrDefault(x => x.Username == userName);
             if (result == null)
             {
                 return 0;
@@ -60,40 +58,43 @@ namespace Insurance.Data.Dao
             }
         }
 
-        public List<AdminUser> ListAll()
+        public List<CustomerUser> ListAll()
         {
-            return db.AdminUsers.OrderBy(x => x.Id).ToList();
+            return db.CustomerUsers.OrderBy(x => x.Id).ToList();
         }
 
-        public IEnumerable<AdminUser> ListAllPaging(string searchString, int page, int pageSize)
+        public IEnumerable<CustomerUser> ListAllPaging(string searchString, int page, int pageSize)
         {
-            IQueryable<AdminUser> model = db.AdminUsers;
+            IQueryable<CustomerUser> model = db.CustomerUsers;
             if (!string.IsNullOrEmpty(searchString))
             {
-                model = model.Where(x => x.FullName.Contains(searchString) || x.Email.Contains(searchString));
+                model = model.Where(x => x.FullName.Contains(searchString) || x.Email.Contains(searchString) || x.Username.Contains(searchString));
             }
             return model.OrderByDescending(x => x.Id).ToPagedList(page, pageSize);
         }
 
-        public AdminUser GetByID(string userName)
+        public CustomerUser GetByID(string userName)
         {
-            return db.AdminUsers.SingleOrDefault(x => x.Username == userName);
+            return db.CustomerUsers.SingleOrDefault(x => x.Username == userName);
         }
 
-        public AdminUser ViewDetail(long id)
+        public CustomerUser ViewDetail(long id)
         {
-            return db.AdminUsers.Find(id);
+            return db.CustomerUsers.Find(id);
         }
 
-        public bool Update(AdminUser entity)
+        public bool Update(CustomerUser entity)
         {
-            var user = db.AdminUsers.Find(entity.Id);
+            var user = db.CustomerUsers.Find(entity.Id);
             if (user != null)
             {
                 user.FullName = entity.FullName;
                 user.Email = entity.Email;
-                user.Status = entity.Status;
                 user.Password = entity.Password;
+                user.Address = entity.Address;
+                user.Phone = entity.Phone;
+                user.BirthDay = entity.BirthDay;
+                user.Status = entity.Status;
                 if (!string.IsNullOrEmpty(entity.Password))
                 {
                     user.Password = entity.Password;
@@ -111,8 +112,8 @@ namespace Insurance.Data.Dao
         {
             try
             {
-                var adminUser = db.AdminUsers.Find(id);
-                db.AdminUsers.Remove(adminUser);
+                var customerUser = db.CustomerUsers.Find(id);
+                db.CustomerUsers.Remove(customerUser);
                 db.SaveChanges();
                 return true;
             }
