@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dao\AdminUserDao.cs" />
+    <Compile Include="Dao\CustomerUserDao.cs" />
     <Compile Include="Dao\ProductCategoryDao.cs" />
     <Compile Include="InsuranceDbContext.cs" />
     <Compile Include="Migrations\202404231536422_initialInsuranceDb.cs" />

@@ -1,39 +1,224 @@
 ﻿<!DOCTYPE html>
-<html>
+<html class="no-js" lang="en">
+
+<!-- Mirrored from html.rudhisasmito.com/insure/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Apr 2024 04:25:08 GMT -->
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    <!-- Basic Page Needs
+    ================================================== -->
+    <meta charset="utf-8">
+    <!--[if IE]><meta http-equiv="x-ua-compatible" content="IE=9" /><![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Insure - Insurance Company HTML Template</title>
+    <meta name="description" content="Insure - Insurance Company HTML Template. It is built using bootstrap 3.3.2 framework, works totally responsive, easy to customise, well commented codes and seo friendly.">
+    <meta name="keywords" content="insure, insurance, company, house insurance, car insurance, life insurance, motorcylcle insurance, boat insurance, travel insurance">
+    <meta name="author" content="rudhisasmito.com">
+
+    <!-- ==============================================
+    Favicons
+    =============================================== -->
+    <link rel="shortcut icon" href="Assets/client/images/favicon.ico">
+    <link rel="apple-touch-icon" href="Assets/client/images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="Assets/client/images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="Assets/client/images/apple-touch-icon-114x114.png">
+
+    <!-- ==============================================
+    CSS VENDOR
+    =============================================== -->
+    <link rel="stylesheet" type="text/css" href="Assets/client/css/vendor/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="Assets/client/css/vendor/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="Assets/client/css/vendor/owl.carousel.min.css">
+    <link rel="stylesheet" type="text/css" href="Assets/client/css/vendor/owl.theme.default.min.css">
+    <link rel="stylesheet" type="text/css" href="Assets/client/css/vendor/magnific-popup.css">
+
+    <!-- ==============================================
+    Google Fonts
+    =============================================== -->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,700i' rel='stylesheet' type='text/css'>
+
+    <!-- ==============================================
+    Custom Stylesheet
+    =============================================== -->
+    <link rel="stylesheet" type="text/css" href="Assets/client/css/style.css" />
+
+    <script type="text/javascript" src="Assets/client/js/vendor/modernizr.min.js"></script>
+
 </head>
+
 <body>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
-        <div class="container">
-            @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
-                <ul class="navbar-nav flex-grow-1">
-                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
+
+    <!-- Load page -->
+    <div class="animationload">
+        <div class="loader"></div>
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+    <!-- TOPBAR -->
+    @*<div class="topbar">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-md-6">
+                    <div class="topbar-left">
+                        <div class="welcome-text">
+                            Welcome to insurance company, we're here to help you
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                    <div class="topbar-right">
+                        <ul class="topbar-menu">
+                            <li><a href="find-an-agents.html" title="Find An Agents">Find An Agents</a></li>
+                            <li><a href="faq.html" title="FAQ">FAQ's</a></li>
+                            <li><a href="careers.html" title="Careers">Careers</a></li>
+                        </ul>
+                        <ul class="topbar-sosmed">
+                            <li>
+                                <a href="#"><i class="fa fa-facebook"></i></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-twitter"></i></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-instagram"></i></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-pinterest"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>*@
+
+    @{Html.RenderAction("Header", "Home"); }
+
+    @RenderBody()
+
+    <!-- FOOTER SECTION -->
+    <div class="footer">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-sm-3 col-md-3">
+                    <div class="footer-item">
+                        <img src="Assets/client/images/logo-bottom.png" alt="logo bottom">
+                        <p>This template is a micro niche for business categories, namely Insure - Insurance Company HTML Template. there was an excess of this template is using HTML/CSS.</p>
+                        <div class="footer-sosmed">
+                            <a href="#" title="">
+                                <div class="item">
+                                    <i class="fa fa-facebook"></i>
+                                </div>
+                            </a>
+                            <a href="#" title="">
+                                <div class="item">
+                                    <i class="fa fa-twitter"></i>
+                                </div>
+                            </a>
+                            <a href="#" title="">
+                                <div class="item">
+                                    <i class="fa fa-instagram"></i>
+                                </div>
+                            </a>
+                            <a href="#" title="">
+                                <div class="item">
+                                    <i class="fa fa-pinterest"></i>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3 col-md-3">
+                    <div class="footer-item">
+                        <div class="footer-title">
+                            Contact Info
+                        </div>
+                        <ul class="list-info">
+                            <li>
+                                <div class="info-icon">
+                                    <span class="fa fa-map-marker"></span>
+                                </div>
+                                <div class="info-text">99 S.t Jomblo Park Pekanbaru 28292. Indonesia</div>
+                            </li>
+                            <li>
+                                <div class="info-icon">
+                                    <span class="fa fa-phone"></span>
+                                </div>
+                                <div class="info-text">(0761) 654-123987</div>
+                            </li>
+                            <li>
+                                <div class="info-icon">
+                                    <span class="fa fa-envelope"></span>
+                                </div>
+                                <div class="info-text">info@yoursite.com</div>
+                            </li>
+                            <li>
+                                <div class="info-icon">
+                                    <span class="fa fa-clock-o"></span>
+                                </div>
+                                <div class="info-text">Mon - Sat 09:00 - 17:00</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-3 col-md-3">
+                    <div class="footer-item">
+                        <div class="footer-title">
+                            Our Services
+                        </div>
+                        <ul class="list">
+                            <li><a href="service-life-insurance.html" title="">Life Insurance</a></li>
+                            <li><a href="service-car-insurance.html" title="">Car Insurance</a></li>
+                            <li><a href="service-travel-insurance.html" title="">Travel Insurance</a></li>
+                            <li><a href="service-house-insurance.html" title="">House Insurance</a></li>
+                            <li><a href="service-vehicle-insurance.html" title="">Vehicle Insurance</a></li>
+                            <li><a href="service-boat-insurance.html" title="">Boat Insurance</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-3 col-md-3">
+                    <div class="footer-item">
+                        <div class="footer-title">
+                            Additional Links
+                        </div>
+                        <ul class="list">
+                            <li><a href="our-company.html" title="">Our Company</a></li>
+                            <li><a href="our-team.html" title="">Our Team</a></li>
+                            <li><a href="our-partners.html" title="">Our Partners</a></li>
+                            <li><a href="careers.html" title="">Careers</a></li>
+                            <li><a href="contact-us.html" title="">Contact Us</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="fcopy">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 col-md-12">
+                        <p class="ftex">&copy; 2017 Insure by Rudhi Sasmito - All Rights Reserved</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- JS VENDOR -->
+    <script type="text/javascript" src="Assets/client/js/vendor/jquery.min.js"></script>
+    <script type="text/javascript" src="Assets/client/js/vendor/bootstrap.min.js"></script>
+    <script type="text/javascript" src="Assets/client/js/vendor/jquery.superslides.js"></script>
+    <script type="text/javascript" src="Assets/client/js/vendor/owl.carousel.js"></script>
+    <script type="text/javascript" src="Assets/client/js/vendor/bootstrap-hover-dropdown.min.js"></script>
+    <script type="text/javascript" src="Assets/client/js/vendor/jquery.magnific-popup.min.js"></script>
+    <!-- sendmail -->
+    <script type="text/javascript" src="Assets/client/js/vendor/validator.min.js"></script>
+    <script type="text/javascript" src="Assets/client/js/vendor/form-scripts.js"></script>
+
+    <script type="text/javascript" src="Assets/client/js/script.js"></script>
+
 </body>
+
+<!-- Mirrored from html.rudhisasmito.com/insure/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Apr 2024 04:26:07 GMT -->
 </html>
