@@ -1,130 +1,332 @@
-$(window).load(function(){
+$(document).ready(function(){
+
+	"use strict";
 	
-	// We are listening to the window.load event, so we can be sure
-	// that the images in the slideshow are loaded properly.
+	/* =================================
+	LOADER 
+	=================================== */
+	$(".loader").delay(400).fadeOut();
+    $(".animationload").delay(400).fadeOut("fast");
+	
+	/* =================================
+	NAVBAR 
+	=================================== */
+	jQuery(window).scroll(function () {
+		var top = jQuery(document).scrollTop();
+		var batas = jQuery(window).height();
 
-
-	// Testing wether the current browser supports the canvas element:
-	var supportCanvas = 'getContext' in document.createElement('canvas');
-
-	// The canvas manipulations of the images are CPU intensive,
-	// this is why we are using setTimeout to make them asynchronous
-	// and improve the responsiveness of the page.
-
-	var slides = $('#slideshow li'),
-		current = 0,
-		slideshow = {width:0,height:0};
-
-	setTimeout(function(){
-		
-		window.console && window.console.time && console.time('Generated In');
-		
-		if(supportCanvas){
-			$('#slideshow img').each(function(){
-
-				if(!slideshow.width){
-					// Taking the dimensions of the first image:
-					slideshow.width = this.width;
-					slideshow.height = this.height;
-				}
-				
-				// Rendering the modified versions of the images:
-				createCanvasOverlay(this);
-			});
+		if ( top > batas ) {
+			jQuery('.navbar-main').addClass('stiky');
+		}else {
+			jQuery('.navbar-main').removeClass('stiky'); 
 		}
+	});
+	
+	/* =================================
+	BANNER ROTATOR IMAGE 
+	=================================== */
+	$('#slides').superslides({
+		//animation: "fade",
+		play: 5000,
+		slide_speed: 800,
+		pagination: true,
+		hashchange: false,
+		scrollable: true,
 		
-		window.console && window.console.timeEnd && console.timeEnd('Generated In');
-		
-		$('#slideshow .arrow').click(function(){
-			var li			= slides.eq(current),
-				canvas		= li.find('canvas'),
-				nextIndex	= 0;
+	});
+	
+	/* =================================
+	OWL
+	=================================== */
+	
+	var about = $("#about-caro");
+	about.owlCarousel({
+		items: 1,
+		autoplay: true,
+		autoplayTimeout: 5000,
+		autoplayHoverPause: true,
+		loop: true
+	});
+	
+	var owl = $("#owl-testimony");
+	owl.owlCarousel({
+		autoplay: 5000,
+		stopOnHover: true,
+		margin: 30,
+		items : 1,
+		//nav: false,
+		//navText: ["<span class='fa fa-chevron-left'></span>", "<span class='fa fa-chevron-right'></span>"],
+		//dots: false,
+		loop: true,
+	});
+	
+	/* =================================
+	FAQ
+	=================================== */	
+	$('.panel-heading a').on('click', function() {
+		$('.panel-heading').removeClass('active');
+		$(this).parents('.panel-heading').addClass('active');
+	});
+	
+	/* =================================
+	MAGNIFIC POPUP
+	=================================== */
+	$('.popup-youtube, .popup-vimeo, .popup-gmaps').magnificPopup({
+      disableOn: 700,
+      type: 'iframe',
+      mainClass: 'mfp-fade',
+      removalDelay: 160,
+      preloader: false,
 
-			// Depending on whether this is the next or previous
-			// arrow, calculate the index of the next slide accordingly.
-			
-			if($(this).hasClass('next')){
-				nextIndex = current >= slides.length-1 ? 0 : current+1;
-			}
-			else {
-				nextIndex = current <= 0 ? slides.length-1 : current-1;
-			}
+      fixedContentPos: false
+    });
 
-			var next = slides.eq(nextIndex);
-			
-			if(supportCanvas){
 
-				// This browser supports canvas, fade it into view:
+	/* =================================
+	GOOGLE MAPS
+	=================================== */
 
-				canvas.fadeIn(function(){
-					
-					// Show the next slide below the current one:
-					next.show();
-					current = nextIndex;
-					
-					// Fade the current slide out of view:
-					li.fadeOut(function(){
-						li.removeClass('slideActive');
-						canvas.hide();
-						next.addClass('slideActive');
-					});
-				});
-			}
-			else {
-				
-				// This browser does not support canvas.
-				// Use the plain version of the slideshow.
-				
-				current=nextIndex;
-				next.addClass('slideActive').show();
-				li.removeClass('slideActive').hide();
-			}
+	function CustomZoomControl(controlDiv, map) {
+		//grap the zoom elements from the DOM and insert them in the map
+		var controlUIzoomIn= document.getElementById('cd-zoom-in'),
+			controlUIzoomOut= document.getElementById('cd-zoom-out');
+		controlDiv.appendChild(controlUIzoomIn);
+		controlDiv.appendChild(controlUIzoomOut);
+
+		// Setup the click event listeners and zoom-in or out according to the clicked element
+		google.maps.event.addDomListener(controlUIzoomIn, 'click', function() {
+			map.setZoom(map.getZoom()+1)
 		});
-		
-	},100);
-
-	// This function takes an image and renders
-	// a version of it similar to the Overlay blending
-	// mode in Photoshop.
-	
-	function createCanvasOverlay(image){
-
-		var canvas			= document.createElement('canvas'),
-			canvasContext	= canvas.getContext("2d");
-		
-		// Make it the same size as the image
-		canvas.width = slideshow.width;
-		canvas.height = slideshow.height;
-		
-		// Drawing the default version of the image on the canvas:
-		canvasContext.drawImage(image,0,0);
-		
-
-		// Taking the image data and storing it in the imageData array:
-		var imageData	= canvasContext.getImageData(0,0,canvas.width,canvas.height),
-			data		= imageData.data;
-		
-		// Loop through all the pixels in the imageData array, and modify
-		// the red, green, and blue color values.
-		
-		for(var i = 0,z=data.length;i<z;i++){
-			
-			// The values for red, green and blue are consecutive elements
-			// in the imageData array. We modify the three of them at once:
-			
-			data[i] = ((data[i] < 128) ? (2*data[i]*data[i] / 255) : (255 - 2 * (255 - data[i]) * (255 - data[i]) / 255));
-			data[++i] = ((data[i] < 128) ? (2*data[i]*data[i] / 255) : (255 - 2 * (255 - data[i]) * (255 - data[i]) / 255));
-			data[++i] = ((data[i] < 128) ? (2*data[i]*data[i] / 255) : (255 - 2 * (255 - data[i]) * (255 - data[i]) / 255));
-			
-			// After the RGB elements is the alpha value, but we leave it the same.
-			++i;
-		}
-		
-		// Putting the modified imageData back to the canvas.
-		canvasContext.putImageData(imageData,0,0);
-		
-		// Inserting the canvas in the DOM, before the image:
-		image.parentNode.insertBefore(canvas,image);
+		google.maps.event.addDomListener(controlUIzoomOut, 'click', function() {
+			map.setZoom(map.getZoom()-1)
+		});
 	}
+
+	if ($('#maps').length) {
+	//set your google maps parameters
+	var myLat = $('#maps').data('lat'),
+	myLng = $('#maps').data('lng'),
+	myMarkerx = $('#maps').data('marker');
+	
+	
+	var latitude = myLat,
+		longitude = myLng,
+		markerx = myMarkerx,
+		map_zoom = 14;
+
+	//google map custom marker icon - .png fallback for IE11
+	var is_internetExplorer11= navigator.userAgent.toLowerCase().indexOf('trident') > -1;
+	var marker_url = ( is_internetExplorer11 ) ? markerx : markerx;
+
+	//define the basic color of your map, plus a value for saturation and brightness
+	var main_color = '#000000',
+		saturation_value= -80,
+		brightness_value= 5;
+
+	//we define here the style of the map
+	var style= [
+		{
+			//set saturation for the labels on the map
+			elementType: "labels",
+			stylers: [
+				{saturation: saturation_value}
+			]
+		},
+		{ //poi stands for point of interest - don't show these lables on the map
+			featureType: "poi",
+			elementType: "labels",
+			stylers: [
+				{visibility: "off"}
+			]
+		},
+		{
+			//don't show highways lables on the map
+			featureType: 'road.highway',
+			elementType: 'labels',
+			stylers: [
+				{visibility: "off"}
+			]
+		},
+		{
+			//don't show local road lables on the map
+			featureType: "road.local",
+			elementType: "labels.icon",
+			stylers: [
+				{visibility: "off"}
+			]
+		},
+		{
+			//don't show arterial road lables on the map
+			featureType: "road.arterial",
+			elementType: "labels.icon",
+			stylers: [
+				{visibility: "off"}
+			]
+		},
+		{
+			//don't show road lables on the map
+			featureType: "road",
+			elementType: "geometry.stroke",
+			stylers: [
+				{visibility: "off"}
+			]
+		},
+		//style different elements on the map
+		{
+			featureType: "transit",
+			elementType: "geometry.fill",
+			stylers: [
+				{ hue: main_color },
+				{ visibility: "on" },
+				{ lightness: brightness_value },
+				{ saturation: saturation_value }
+			]
+		},
+		{
+			featureType: "poi",
+			elementType: "geometry.fill",
+			stylers: [
+				{ hue: main_color },
+				{ visibility: "on" },
+				{ lightness: brightness_value },
+				{ saturation: saturation_value }
+			]
+		},
+		{
+			featureType: "poi.government",
+			elementType: "geometry.fill",
+			stylers: [
+				{ hue: main_color },
+				{ visibility: "on" },
+				{ lightness: brightness_value },
+				{ saturation: saturation_value }
+			]
+		},
+		{
+			featureType: "poi.sport_complex",
+			elementType: "geometry.fill",
+			stylers: [
+				{ hue: main_color },
+				{ visibility: "on" },
+				{ lightness: brightness_value },
+				{ saturation: saturation_value }
+			]
+		},
+		{
+			featureType: "poi.attraction",
+			elementType: "geometry.fill",
+			stylers: [
+				{ hue: main_color },
+				{ visibility: "on" },
+				{ lightness: brightness_value },
+				{ saturation: saturation_value }
+			]
+		},
+		{
+			featureType: "poi.business",
+			elementType: "geometry.fill",
+			stylers: [
+				{ hue: main_color },
+				{ visibility: "on" },
+				{ lightness: brightness_value },
+				{ saturation: saturation_value }
+			]
+		},
+		{
+			featureType: "transit",
+			elementType: "geometry.fill",
+			stylers: [
+				{ hue: main_color },
+				{ visibility: "on" },
+				{ lightness: brightness_value },
+				{ saturation: saturation_value }
+			]
+		},
+		{
+			featureType: "transit.station",
+			elementType: "geometry.fill",
+			stylers: [
+				{ hue: main_color },
+				{ visibility: "on" },
+				{ lightness: brightness_value },
+				{ saturation: saturation_value }
+			]
+		},
+		{
+			featureType: "landscape",
+			stylers: [
+				{ hue: main_color },
+				{ visibility: "on" },
+				{ lightness: brightness_value },
+				{ saturation: saturation_value }
+			]
+
+		},
+		{
+			featureType: "road",
+			elementType: "geometry.fill",
+			stylers: [
+				{ hue: main_color },
+				{ visibility: "on" },
+				{ lightness: brightness_value },
+				{ saturation: saturation_value }
+			]
+		},
+		{
+			featureType: "road.highway",
+			elementType: "geometry.fill",
+			stylers: [
+				{ hue: main_color },
+				{ visibility: "on" },
+				{ lightness: brightness_value },
+				{ saturation: saturation_value }
+			]
+		},
+		{
+			featureType: "water",
+			elementType: "geometry",
+			stylers: [
+				{ hue: main_color },
+				{ visibility: "on" },
+				{ lightness: brightness_value },
+				{ saturation: saturation_value }
+			]
+		}
+	];
+
+	//set google map options
+	var map_options = {
+		center: new google.maps.LatLng(latitude, longitude),
+		zoom: map_zoom,
+		panControl: false,
+		zoomControl: false,
+		mapTypeControl: false,
+		streetViewControl: false,
+		mapTypeId: google.maps.MapTypeId.ROADMAP,
+		scrollwheel: false,
+		styles: style,
+	}
+	//inizialize the map
+	var map = new google.maps.Map(document.getElementById('maps'), map_options);
+	//add a custom marker to the map
+	var marker = new google.maps.Marker({
+		position: new google.maps.LatLng(latitude, longitude),
+		map: map,
+		visible: true,
+		icon: marker_url,
+	});
+
+	var zoomControlDiv = document.createElement('div');
+	var zoomControl = new CustomZoomControl(zoomControlDiv, map);
+
+	//insert the zoom div on the top left of the map
+	map.controls[google.maps.ControlPosition.LEFT_TOP].push(zoomControlDiv);
+  }
 	
 });
+
+
+
+
+  
+  
