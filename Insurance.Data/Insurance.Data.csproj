@@ -74,6 +74,10 @@
     <Compile Include="Migrations\202404251507445_addProductCuss.Designer.cs">
       <DependentUpon>202404251507445_addProductCuss.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202404270857239_suaLaiDatabase.cs" />
+    <Compile Include="Migrations\202404270857239_suaLaiDatabase.Designer.cs">
+      <DependentUpon>202404270857239_suaLaiDatabase.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AdminUser.cs" />
     <Compile Include="Models\Cart.cs" />
@@ -102,6 +106,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202404251507445_addProductCuss.resx">
       <DependentUpon>202404251507445_addProductCuss.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202404270857239_suaLaiDatabase.resx">
+      <DependentUpon>202404270857239_suaLaiDatabase.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

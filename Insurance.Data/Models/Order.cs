@@ -27,6 +27,11 @@ namespace Insurance.Data.Models
         [MaxLength(256)]
         public string CustomerEmail { set; get; }
 
+        //CMND
+        [Required]
+        [MaxLength(15)]
+        public string CustomerIdentity { set; get; }
+
         [Required]
         [MaxLength(20)]
         public string CustomerMobile { set; get; }
@@ -43,8 +48,6 @@ namespace Insurance.Data.Models
 
         [Required]
         public string PaymentStatus { set; get; }
-
-        public int DiscountPercent { set; get; }
 
         public bool Status { set; get; }
         public int CustomerID { set; get; }
