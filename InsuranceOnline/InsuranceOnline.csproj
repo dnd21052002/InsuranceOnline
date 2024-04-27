@@ -133,9 +133,11 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\BaseController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CustomerUserController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductCategoryController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UserAdminController.cs" />
     <Compile Include="Areas\Admin\Models\LoginModel.cs" />
     <Compile Include="Areas\Admin\Models\UserLogin.cs" />
     <Compile Include="Common\UserLogin.cs" />
@@ -1373,6 +1375,12 @@
     <Content Include="Assets\client\fonts\fontawesome-webfont862f.ttf" />
     <Content Include="Assets\client\fonts\fontawesome-webfont862f.woff" />
     <Content Include="Assets\client\fonts\fontawesome-webfontd41d.eot" />
+    <Content Include="Areas\Admin\Views\CustomerUser\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\CustomerUser\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\CustomerUser\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\UserAdmin\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\UserAdmin\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\UserAdmin\Index.cshtml" />
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
     <Content Include="Scripts\jquery-3.7.0.min.js" />
@@ -1407,6 +1415,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Admin\Views\Base\" />
+    <Folder Include="Areas\Admin\Views\Product\" />
     <Folder Include="Views\Default\" />
   </ItemGroup>
   <ItemGroup>
