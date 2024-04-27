@@ -23,6 +23,7 @@ namespace Insurance.Data.Models
         public string Description { set; get; }
         public int? DisplayOrder { set; get; }
         public bool? HomeFlag { set; get; }
+        public string Image { set; get; }
 
         public virtual IEnumerable<Product> Products { set; get; }
 
