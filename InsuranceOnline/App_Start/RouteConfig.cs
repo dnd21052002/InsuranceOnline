@@ -14,9 +14,23 @@ namespace InsuranceOnline
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "Register",
+                url: "dang-ky",
+                defaults: new { controller = "User", action = "Register", id = UrlParameter.Optional },
+                namespaces: new[] { "InsuranceOnline.Controllers" }
+            );
+
+            routes.MapRoute(
                 name: "Login",
                 url: "dang-nhap",
                 defaults: new { controller = "User", action = "Login", id = UrlParameter.Optional },
+                namespaces: new[] { "InsuranceOnline.Controllers" }
+            );
+
+            routes.MapRoute(
+                name: "Logout",
+                url: "dang-xuat",
+                defaults: new { controller = "User", action = "Logout", id = UrlParameter.Optional },
                 namespaces: new[] { "InsuranceOnline.Controllers" }
             );
 

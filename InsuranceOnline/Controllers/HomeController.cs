@@ -29,6 +29,15 @@ namespace InsuranceOnline.Controllers
             return PartialView(listProductCate);
         }
 
+        [ChildActionOnly]
+        public ActionResult ProductCat()
+        {
+            var productCateDao = new ProductCategoryDao();
+            var listProductCate = productCateDao.ListAll();
+
+            return PartialView(listProductCate);
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

@@ -1,5 +1,6 @@
 ﻿using Common;
 using Insurance.Data.Dao;
+using Insurance.Data.Models;
 using InsuranceOnline.Common;
 using InsuranceOnline.Models;
 using System;
@@ -61,6 +62,55 @@ namespace InsuranceOnline.Controllers
                 }
             }
             return View(model);
+        }
+
+        public ActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Register(RegisterModel model)
+        {
+            if(ModelState.IsValid)
+            {
+                var dao = new CustomerUserDao();
+                if(dao.CheckUserName(model.UserName))
+                {
+                    ModelState.AddModelError("", "Tên đăng nhập đã tồn tại");
+                }
+                else if(dao.CheckEmail(model.Email))
+                {
+                    ModelState.AddModelError("", "Email đã tồn tại");
+                }
+                else
+                {
+                    var user = new CustomerUser();
+                    user.Username = model.UserName;
+                    user.Password = Encryptor.MD5Hash(model.Password);
+                    user.Email = model.Email;
+                    user.FullName = model.FullName;
+                    user.Status = 1;
+
+                    var result = dao.Insert(user);
+                    if(result > 0)
+                    {
+                        ViewBag.Success = "Đăng ký thành công";
+                        model = new RegisterModel();
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Đăng ký không thành công");
+                    }
+                }
+            }
+            return View(model);
+        }
+
+        public ActionResult Logout()
+        {
+            Session[CommonConstants.USER_SESSION] = null;
+            return Redirect("/");
         }
     }
 }
