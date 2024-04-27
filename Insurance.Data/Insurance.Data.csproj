@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dao\AdminUserDao.cs" />
+    <Compile Include="Dao\CustomerUserDao.cs" />
     <Compile Include="Dao\ProductCategoryDao.cs" />
     <Compile Include="InsuranceDbContext.cs" />
     <Compile Include="Migrations\202404231536422_initialInsuranceDb.cs" />
@@ -69,6 +70,10 @@
     <Compile Include="Migrations\202404240250074_updateStatus.designer.cs">
       <DependentUpon>202404240250074_updateStatus.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202404251507445_addProductCuss.cs" />
+    <Compile Include="Migrations\202404251507445_addProductCuss.Designer.cs">
+      <DependentUpon>202404251507445_addProductCuss.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AdminUser.cs" />
     <Compile Include="Models\Cart.cs" />
@@ -78,6 +83,7 @@
     <Compile Include="Models\OrderDetail.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\ProductCategory.cs" />
+    <Compile Include="Models\ProductCustomer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -93,6 +99,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202404240250074_updateStatus.resx">
       <DependentUpon>202404240250074_updateStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202404251507445_addProductCuss.resx">
+      <DependentUpon>202404251507445_addProductCuss.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

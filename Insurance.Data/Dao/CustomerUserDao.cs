@@ -1,4 +1,4 @@
-﻿using Insurance.Data.Models;
+using Insurance.Data.Models;
 using PagedList;
 using System;
 using System.Collections.Generic;
@@ -11,7 +11,7 @@ namespace Insurance.Data.Dao
     public class CustomerUserDao
     {
         private InsuranceDbContext db = null;
-
+      
         public CustomerUserDao()
         {
             db = new InsuranceDbContext();
@@ -73,7 +73,7 @@ namespace Insurance.Data.Dao
             return model.OrderByDescending(x => x.Id).ToPagedList(page, pageSize);
         }
 
-        public CustomerUser GetByID(string userName)
+        public CustomerUser GetByUsername(string userName)
         {
             return db.CustomerUsers.SingleOrDefault(x => x.Username == userName);
         }
@@ -124,3 +124,4 @@ namespace Insurance.Data.Dao
         }
     }
 }
+

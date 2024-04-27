@@ -1,0 +1,107 @@
+﻿@model List<Insurance.Data.Models.ProductCategory>
+@using InsuranceOnline.Common
+@using Insurance.Data.Dao
+<!-- TOPBAR LOGO SECTION -->
+<div class="topbar-logo">
+    <div class="container">
+
+        <a class="navbar-brand" href="/">
+            <img src="Assets/client/images/logo.png" alt="" />
+        </a>
+    </div>
+</div>
+
+<!-- NAVBAR SECTION -->
+<div class="navbar navbar-main">
+
+    <div class="container container-nav">
+
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+        </div>
+        @{
+            var session = (UserLogin)Session[Common.CommonConstants.USER_SESSION];
+        }
+        @if(session == null)
+        {
+            <a href="/dang-nhap" title="" class="btn btn-orange-cta pull-right btn-view-all">Đăng nhập</a>
+        }
+else
+            {
+                var dao = new CustomerUserDao();
+                var user = dao.GetByUsername(session.UserName);
+
+                <a href="/thong-tin-ca-nhan" title="" class="btn btn-orange-cta pull-right btn-view-all">Xin chào, @user.FullName</a>
+            }
+
+        <nav class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-left">
+                <li>
+                    <a href="/">TRANG CHỦ</a>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false">VỀ CHÚNG TÔI <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="about-company.html">OUR COMPANY</a></li>
+                        <li><a href="about-history.html">COMPANY HISTORY</a></li>
+                        <li><a href="about-team.html">OUR TEAM</a></li>
+                        <li><a href="about-partners.html">OUR PARTNERS</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false">BẢO HIỂM <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        @foreach (var item in Model)
+                        {
+                            <li><a href="@Url.Action("Index", "Product", new { id = item.ID })">@item.Name</a></li>
+                        }
+
+                        <li><a href="services.html">SERVICES 1</a></li>
+                        <li><a href="services-2.html">SERVICES 2</a></li>
+                        <li><a href="services-detail.html">SERVICES DETAIL</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false">PAGES <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="pricing-table.html">PRICING TABLE</a></li>
+                        <li><a href="404page.html">404 PAGE</a></li>
+                        <li><a href="career.html">CAREER</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false">PROJECTS <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="project-grid.html">GRID LAYOUT</a></li>
+                        <li><a href="project-detail.html">SINGLE PROJECT</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false">NEWS <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="news-grid.html">GRID BAR</a></li>
+                        <li><a href="news-sidebar.html">SIDEBAR</a></li>
+                        <li><a href="news-detail.html">SINGLE NEWS</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false">CONTACT <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="contact.html">CONTACT US</a></li>
+                        <li><a href="contact-quote.html">GET A QUOTE</a></li>
+                    </ul>
+                </li>
+
+            </ul>
+        </nav>
+
+
+
+    </div>
+</div>

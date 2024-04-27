@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Common;
+using Insurance.Data.Dao;
+using Insurance.Data.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,6 +14,19 @@ namespace InsuranceOnline.Controllers
         public ActionResult Index()
         {
             return View();
+        }
+
+        [ChildActionOnly]
+        public ActionResult Header()
+        {
+           if (Session[CommonConstants.USER_SESSION] != null)
+            {
+                ViewBag.User = Session[CommonConstants.USER_SESSION];
+            }
+            var productCateDao = new ProductCategoryDao();
+            var listProductCate = productCateDao.ListAll();
+
+            return PartialView(listProductCate);
         }
 
         public ActionResult About()
