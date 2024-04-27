@@ -61,5 +61,15 @@ namespace Insurance.Data.Dao
         {
             return db.CustomerUsers.SingleOrDefault(x => x.Username == userName);
         }
+
+        public bool CheckUserName(string userName)
+        {
+            return db.CustomerUsers.Count(x => x.Username == userName) > 0;
+        }
+
+        public bool CheckEmail(string email)
+        {
+            return db.CustomerUsers.Count(x => x.Email == email) > 0;
+        }
     }
 }
