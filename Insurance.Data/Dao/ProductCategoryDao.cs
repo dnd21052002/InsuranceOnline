@@ -12,7 +12,8 @@ namespace Insurance.Data.Dao
 {
     public class ProductCategoryDao
     {
-        InsuranceDbContext db = null;
+        private InsuranceDbContext db = null;
+
         public ProductCategoryDao()
         {
             db = new InsuranceDbContext();
