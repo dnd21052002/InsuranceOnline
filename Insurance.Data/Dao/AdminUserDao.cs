@@ -93,11 +93,6 @@ namespace Insurance.Data.Dao
                 user.FullName = entity.FullName;
                 user.Email = entity.Email;
                 user.Status = entity.Status;
-                user.Password = entity.Password;
-                if (!string.IsNullOrEmpty(entity.Password))
-                {
-                    user.Password = entity.Password;
-                }
                 db.SaveChanges();
                 return true;
             }

@@ -29,6 +29,7 @@ namespace InsuranceOnline.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult Create(ProductCategory productCategory)
         {
             if (ModelState.IsValid)
@@ -56,6 +57,7 @@ namespace InsuranceOnline.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult Edit(ProductCategory productCategory)
         {
             if (ModelState.IsValid)
@@ -90,7 +92,6 @@ namespace InsuranceOnline.Areas.Admin.Controllers
                 SetAlert("Xóa danh mục sản phẩm không thành công", "error");
                 return RedirectToAction("Index");
             }
-            
         }
     }
 }

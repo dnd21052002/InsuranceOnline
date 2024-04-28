@@ -64,11 +64,7 @@ namespace InsuranceOnline.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 var dao = new AdminUserDao();
-                if (!string.IsNullOrEmpty(adminUser.Password))
-                {
-                    var encryptedMd5Pas = Encryptor.MD5Hash(adminUser.Password);
-                    adminUser.Password = encryptedMd5Pas;
-                }
+
                 var result = dao.Update(adminUser);
                 if (result)
                 {
