@@ -16,21 +16,21 @@ namespace Insurance.Data.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { set; get; }
 
-        [Required]
+        [Required(ErrorMessage = "vui lòng nhập tên bảo hiểm")]
         [MaxLength(100)]
         public string Name { set; get; }
 
-        [Required]
+        [Required(ErrorMessage = "Vui lòng chọn danh mục")]
         public int CategoryID { set; get; }
 
-        [Required]
+        [Required(ErrorMessage = "Vui lòng nhập giá")]
         public decimal Price { set; get; }
 
         public decimal? PromotionPrice { set; get; }
 
         public int? Warranty { set; get; }
 
-        [Required]
+        [Required(ErrorMessage = "Vui lòng nhập mô tả bảo hiểm")]
         public string Description { set; get; }
 
         public bool? HomeFlag { set; get; }

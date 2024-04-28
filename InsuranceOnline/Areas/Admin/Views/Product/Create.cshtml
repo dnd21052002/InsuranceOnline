@@ -1,4 +1,4 @@
-﻿@model Insurance.Data.Models.ProductCategory
+﻿@model Insurance.Data.Models.Product
 
 @{
     ViewBag.Title = "Create";
@@ -6,19 +6,10 @@
 }
 
 @section header{
-    Tạo mới danh mục sản phẩm
+    Tạo mới sản phẩm
 }
 @section jsFooter{
     <script>
-        $('#btnSelectImage').on('click', function (e) {
-            e.preventDefault();;
-            var finder = new CKFinder();
-            finder.selectActionFunction = function (fileUrl) {
-                $('#txtImage').val(fileUrl);
-            };
-            finder.popup();
-        });
-
         var editor = CKEDITOR.replace('txtDescription', {
             customConfig: '/Assets/admin/js/plugins/ckeditor/config.js'
         });
@@ -32,18 +23,27 @@
     <div class="form-horizontal mx-5">
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group mb-2">
-            @Html.LabelFor(model => model.Name, "Tên danh mục", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="form-group  mb-2">
+            @Html.LabelFor(model => model.Name, "Tên sản phẩm", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Name, "Vui lòng nhập tên", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
             </div>
         </div>
-        <div class="form-group mb-2">
-            @Html.LabelFor(model => model.Image, "Ảnh", htmlAttributes: new { @class = "control-label col-md-2" })
+
+        <div class="form-group  mb-2">
+            @Html.LabelFor(model => model.CategoryID, "Danh mục", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.Image, new { htmlAttributes = new { @class = "form-control" }, id = "txtImage" })
-                <a id="btnSelectImage" href="#">Chọn ảnh</a>
+                @Html.DropDownListFor(model => model.CategoryID, (SelectList)ViewBag.CategoryID, "Chọn danh mục", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.CategoryID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group  mb-2">
+            @Html.LabelFor(model => model.Price, "Giá", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -55,10 +55,18 @@
         </div>
 
         <div class="form-group mb-2">
-            @Html.LabelFor(model => model.DisplayOrder, "Thứ tự hiển thị", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.ExpireType, "Loại", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.DisplayOrder, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.DisplayOrder, "", new { @class = "text-danger" })
+                @Html.DropDownListFor(model => model.ExpireType, (IEnumerable<SelectListItem>)ViewBag.ExpireType, "Chọn loại", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ExpireType, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group  mb-2">
+            @Html.LabelFor(model => model.ExpireTime, "Thời hạn", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ExpireTime, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ExpireTime, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -74,7 +82,6 @@
                 @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
             </div>
         </div>
-
         <div class="form-group">
             @Html.LabelFor(model => model.HomeFlag, "Hiển thị trang chủ", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -89,7 +96,7 @@
         </div>
 
         <div class="form-group my-2">
-            <a href="/Admin/ProductCategory/Index" class="btn btn-default btn-dark">Quay lại</a>
+            <a href="/Admin/Product/Index" class="btn btn-default btn-dark">Quay lại</a>
             <button type="submit" value="Tạo mới" class="btn btn-default btn-success">Tạo mới</button>
         </div>
     </div>

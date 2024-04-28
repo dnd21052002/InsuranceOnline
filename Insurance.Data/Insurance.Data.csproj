@@ -57,6 +57,7 @@
     <Compile Include="Dao\AdminUserDao.cs" />
     <Compile Include="Dao\CustomerUserDao.cs" />
     <Compile Include="Dao\ProductCategoryDao.cs" />
+    <Compile Include="Dao\ProductDao.cs" />
     <Compile Include="InsuranceDbContext.cs" />
     <Compile Include="Migrations\202404231536422_initialInsuranceDb.cs" />
     <Compile Include="Migrations\202404231536422_initialInsuranceDb.Designer.cs">

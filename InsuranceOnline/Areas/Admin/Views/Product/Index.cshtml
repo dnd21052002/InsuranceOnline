@@ -1,4 +1,4 @@
-﻿@model PagedList.PagedList<Insurance.Data.Models.ProductCategory>
+﻿@model PagedList.PagedList<Insurance.Data.Models.Product>
 @using PagedList.Mvc;
 @{
     ViewBag.Title = "Index";
@@ -6,12 +6,12 @@
 }
 
 @section header{
-    Danh mục sản phẩm
+    Sản phẩm
 }
 
 <div class="card mb-4">
     <div class="panel-body mt-3 ms-3">
-        @using (Html.BeginForm("Index", "ProductCategory", FormMethod.Get))
+        @using (Html.BeginForm("Index", "Product", FormMethod.Get))
         {
             <div class="form-group">
                 <div class="col-lg-12 d-flex">
@@ -20,7 +20,7 @@
                     </div>
                     <div class="col-md-4">
                         <button type="submit" class="btn btn-success">Tìm kiếm</button>
-                        <a class="btn btn-primary" href="/Admin/ProductCategory/Create">Thêm mới</a>
+                        <a class="btn btn-primary" href="/Admin/Product/Create">Thêm mới</a>
                     </div>
                 </div>
             </div>
@@ -28,10 +28,10 @@
         <table id="datatablesSimple">
             <thead>
                 <tr>
-                    <th>Tên danh mục</th>
-                    <th>Ảnh</th>
-                    <th style="width: 8%">Thứ tự</th>
-                    <th>Alias</th>
+                    <th>Tên sản phẩm</th>
+                    <th>Danh mục</th>
+                    <th>Giá</th>
+                    <th>Thời gian bảo hiểm</th>
                     <th>Trạng thái</th>
                     <th>Hiển thị</th>
                     <th style="width: 10%">Thao tác</th>
@@ -42,9 +42,18 @@
                 {
                     <tr id="row_@item.ID">
                         <td>@item.Name</td>
-                        <td>@item.Image</td>
-                        <td>@item.DisplayOrder</td>
-                        <td>@item.Alias</td>
+                        <td>@(item.ProductCategory != null ? item.ProductCategory.Name : "")</td>
+                        <td>@item.Price</td>
+                        <td>
+                            @if (item.ExpireType == 0)
+                            {
+                                @($"{item.ExpireTime} Tháng")
+                            }
+                            else if (item.ExpireType == 1)
+                            {
+                                @($"{item.ExpireTime} Năm")
+                            }
+                        </td>
                         <td>
                             @if (item.Status == true)
                             {
@@ -66,12 +75,11 @@
                             }
                         </td>
                         <td>
-                            <a class="text-warning" href="/Admin/ProductCategory/Edit/@item.ID"><i class="fas fa-pencil-alt"></i></a>
+                            <a class="text-warning" href="/Admin/Product/Edit/@item.ID"><i class="fas fa-pencil-alt"></i></a>
                             |
-                            <a  class="text-danger deleteBtn" href="#" data-id="@item.ID"><i class="fas fa-trash-alt"></i></a>
+                            <a class="text-danger deleteBtn" href="#" data-id="@item.ID"><i class="fas fa-trash-alt"></i></a>
                         </td>
                     </tr>
-
                 }
             </tbody>
         </table>
@@ -85,7 +93,7 @@
         var id = $(this).data('id');
         if (confirm('Bạn có chắc chắn muốn xóa không?')) {
             $.ajax({
-                url: '/Admin/ProductCategory/Delete/' + id,
+                url: '/Admin/Product/Delete/' + id,
                 type: 'POST',
                 success: function (data) {
                     $('#row_' + id).remove();
