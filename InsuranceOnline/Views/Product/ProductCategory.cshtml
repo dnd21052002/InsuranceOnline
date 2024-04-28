@@ -1,0 +1,82 @@
+﻿@model Insurance.Data.Models.ProductCategory
+@{
+    ViewBag.Title = "ProductCategory";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var listCategory = ViewBag.ListCategory;
+}
+
+<!-- BANNER -->
+<div class="section banner-page services">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-12">
+                <div class="title-page">Bảo hiểm</div>
+                <ol class="breadcrumb">
+                    <li><a href="#">Bảo hiểm</a></li>
+                    <li class="active">@Model.Name</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Page -->
+<div class="section services section-border">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4 col-md-4 col-md-push-8">
+                <div class="widget categories">
+                    <ul class="category-nav">
+                        @foreach(var item in listCategory)
+                        {
+                            <li><a href="/bao-hiem/@item.Alias-@item.ID" title="@item.Name">@item.Name</a></li>
+                        }
+                    </ul>
+                </div>
+
+            </div>
+            <div class="col-sm-8 col-md-8 col-md-pull-4">
+                <div class="single-page">
+                    <img src="@Model.Image" alt="" class="img-responsive">
+                    <div class="margin-bottom-30"></div>
+                    <h2 class="section-heading">
+                        @Model.Name
+                    </h2>
+                    <p>
+                        @Model.Description
+                    </p>
+                    <a href="#" class="btn btn-secondary" title="OUR COMPANY">Các gói @Model.Name</a>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<!-- TESTIMONY -->
+<div class="section testimony">
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-sm-6 col-md-3 col-md-offset-2">
+                <div class="people">
+                    <img class="user-pic" src="/Assets/client/images/say-img-2.jpg" alt="">
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-5 col-md-offset-1">
+
+                <div class="margin-bottom-70"></div>
+                <h2 class="title-agent">Chọn gói bảo hiểm cho bạn ngay!</h2>
+                <p>Các gói bảo hiểm của chúng tôi cung cấp theo thời gian, bạn có thể chọn lựa gói bảo hiểm phù hợp.</p>
+                <a href="#" class="btn btn-secondary" title="OUR COMPANY">Chọn bảo hiểm</a>
+                <div class="margin-bottom-50"></div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+

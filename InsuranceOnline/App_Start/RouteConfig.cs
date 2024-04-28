@@ -35,6 +35,13 @@ namespace InsuranceOnline
             );
 
             routes.MapRoute(
+                name: "ProductCategory",
+                url: "bao-hiem/{alias}-{id}",
+                defaults: new { controller = "Product", action = "ProductCategory", id = UrlParameter.Optional },
+                namespaces: new[] { "InsuranceOnline.Controllers" }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
