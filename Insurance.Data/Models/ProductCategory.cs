@@ -19,6 +19,7 @@ namespace Insurance.Data.Models
         [Required(ErrorMessage = "Tên danh mục không được để trống")]
         [MaxLength(256)]
         public string Name { set; get; }
+
         public string Alias { set; get; }
         public string Description { set; get; }
         public int? DisplayOrder { set; get; }

@@ -29,6 +29,7 @@
             <thead>
                 <tr>
                     <th>Tên danh mục</th>
+                    <th>Ảnh</th>
                     <th>Mô tả</th>
                     <th style="width: 8%">Thứ tự</th>
                     <th>Alias</th>
@@ -42,6 +43,7 @@
                 {
                     <tr id="row_@item.ID">
                         <td>@item.Name</td>
+                        <td>@item.Image</td>
                         <td>@item.Description</td>
                         <td>@item.DisplayOrder</td>
                         <td>@item.Alias</td>
@@ -69,7 +71,6 @@
                             <a class="text-warning" href="/Admin/ProductCategory/Edit/@item.ID"><i class="fas fa-pencil-alt"></i></a>
                             |
                             <a id="deleteBtn" class="text-danger" href="#" data-id="@item.ID"><i class="fas fa-trash-alt"></i></a>
-                            
                         </td>
                     </tr>
                 }

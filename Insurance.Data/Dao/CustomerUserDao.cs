@@ -11,7 +11,7 @@ namespace Insurance.Data.Dao
     public class CustomerUserDao
     {
         private InsuranceDbContext db = null;
-      
+
         public CustomerUserDao()
         {
             db = new InsuranceDbContext();
@@ -78,7 +78,6 @@ namespace Insurance.Data.Dao
             return db.CustomerUsers.SingleOrDefault(x => x.Username == userName);
         }
 
-
         public bool CheckUserName(string userName)
         {
             return db.CustomerUsers.Count(x => x.Username == userName) > 0;
@@ -88,7 +87,7 @@ namespace Insurance.Data.Dao
         {
             return db.CustomerUsers.Count(x => x.Email == email) > 0;
         }
-      
+
         public CustomerUser ViewDetail(long id)
         {
             return db.CustomerUsers.Find(id);
@@ -101,15 +100,10 @@ namespace Insurance.Data.Dao
             {
                 user.FullName = entity.FullName;
                 user.Email = entity.Email;
-                user.Password = entity.Password;
                 user.Address = entity.Address;
                 user.Phone = entity.Phone;
                 user.BirthDay = entity.BirthDay;
                 user.Status = entity.Status;
-                if (!string.IsNullOrEmpty(entity.Password))
-                {
-                    user.Password = entity.Password;
-                }
                 db.SaveChanges();
                 return true;
             }
@@ -135,4 +129,3 @@ namespace Insurance.Data.Dao
         }
     }
 }
-
