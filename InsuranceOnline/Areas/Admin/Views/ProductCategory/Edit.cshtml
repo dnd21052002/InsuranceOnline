@@ -10,6 +10,14 @@
 }
 @section jsFooter{
     <script>
+        $('#btnSelectImage').on('click', function (e) {
+            e.preventDefault();;
+            var finder = new CKFinder();
+            finder.selectActionFunction = function (fileUrl) {
+                $('#txtImage').val(fileUrl);
+            };
+            finder.popup();
+        });
         var editor = CKEDITOR.replace('txtDescription', {
             customConfig: '/Assets/admin/js/plugins/ckeditor/config.js'
         });
@@ -27,6 +35,13 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group mb-2">
+            @Html.LabelFor(model => model.Image, "Ảnh", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Image, new { htmlAttributes = new { @class = "form-control" }, id = "txtImage" })
+                <a id="btnSelectImage" href="#">Chọn ảnh</a>
             </div>
         </div>
 
