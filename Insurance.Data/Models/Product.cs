@@ -23,7 +23,8 @@ namespace Insurance.Data.Models
         [Required(ErrorMessage = "Vui lòng chọn danh mục")]
         public int CategoryID { set; get; }
 
-        [Required(ErrorMessage = "Vui lòng nhập giá")]
+        [DataType(DataType.Currency)]
+        [DisplayFormat(DataFormatString = "{0:n0}", ApplyFormatInEditMode = false)]
         public decimal Price { set; get; }
 
         public decimal? PromotionPrice { set; get; }
