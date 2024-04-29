@@ -34,7 +34,7 @@
         <div class="form-group  mb-2">
             @Html.LabelFor(model => model.CategoryID, "Danh mục", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.CategoryID, (SelectList)ViewBag.CategoryList, new { @class = "form-control" })
+                @Html.DropDownListFor(model => model.CategoryID, null, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.CategoryID, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -57,7 +57,7 @@
         <div class="form-group mb-2">
             @Html.LabelFor(model => model.ExpireType, "Loại", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.ExpireType, (IEnumerable<SelectListItem>)ViewBag.ExpireType, new { @class = "form-control" })
+                @Html.DropDownListFor(model => model.ExpireType, null, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.ExpireType, "", new { @class = "text-danger" })
             </div>
         </div>
