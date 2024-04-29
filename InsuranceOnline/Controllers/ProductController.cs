@@ -25,5 +25,18 @@ namespace InsuranceOnline.Controllers
 
             return View(model);
         }
+
+        public ActionResult ProductByCate(int id)
+        {
+            var dao = new ProductDao();
+
+            var model = dao.ListByCategory(id);
+
+            ViewBag.Category = new ProductCategoryDao().ViewDetail(id);
+
+            ViewBag.ListCategory = new ProductCategoryDao().ListAll();
+
+            return View(model);
+        }
     }
 }
