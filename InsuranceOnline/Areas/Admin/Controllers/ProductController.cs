@@ -56,8 +56,7 @@ namespace InsuranceOnline.Areas.Admin.Controllers
         {
             var product = new ProductDao().ViewDetail(id);
             var categories = new ProductCategoryDao().ListAll();
-            SelectList categoryList = new SelectList(categories, "ID", "Name", product.CategoryID);
-            ViewBag.CategoryList = categoryList;
+            SetViewBag(product.CategoryID);
             SetViewBag(product.ExpireType);
             return View(product);
         }
@@ -105,14 +104,14 @@ namespace InsuranceOnline.Areas.Admin.Controllers
         public void SetViewBag(long? selectedId = null)
         {
             var dao = new ProductCategoryDao();
-            ViewBag.CategoryID = new SelectList(dao.ListAll(), "ID", "Name", selectedId);
+            ViewBag.CategoryID = new SelectList(dao.ListAll(), "ID", "Name", null);
             var expireTypes = new List<SelectListItem>
             {
                 new SelectListItem { Text = "Tháng", Value = "0" },
                 new SelectListItem { Text = "Năm", Value = "1" }
             };
 
-            ViewBag.ExpireType = new SelectList(expireTypes, "Value", "Text", selectedId);
+            ViewBag.ExpireType = new SelectList(expireTypes, "Value", "Text", null);
         }
     }
 }
