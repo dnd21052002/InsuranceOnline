@@ -1421,6 +1421,7 @@
     <Content Include="Views\User\Register.cshtml" />
     <Content Include="Views\Home\ProductCat.cshtml" />
     <Content Include="Views\Product\ProductCategory.cshtml" />
+    <Content Include="Views\Product\ProductByCate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
