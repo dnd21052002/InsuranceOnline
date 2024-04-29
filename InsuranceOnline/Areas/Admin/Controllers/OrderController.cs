@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace InsuranceOnline.Areas.Admin.Controllers
 {
-    public class OrderController : Controller
+    public class OrderController : BaseController
     {
         // GET: Admin/Order
         public ActionResult Index()
