@@ -8,7 +8,7 @@
     <meta charset="utf-8">
     <!--[if IE]><meta http-equiv="x-ua-compatible" content="IE=9" /><![endif]-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Insure - Insurance Company HTML Template</title>
+    <title>@ViewBag.Title</title>
     <meta name="description" content="Insure - Insurance Company HTML Template. It is built using bootstrap 3.3.2 framework, works totally responsive, easy to customise, well commented codes and seo friendly.">
     <meta name="keywords" content="insure, insurance, company, house insurance, car insurance, life insurance, motorcylcle insurance, boat insurance, travel insurance">
     <meta name="author" content="rudhisasmito.com">
@@ -16,19 +16,19 @@
     <!-- ==============================================
     Favicons
     =============================================== -->
-    <link rel="shortcut icon" href="Assets/client/images/favicon.ico">
-    <link rel="apple-touch-icon" href="Assets/client/images/apple-touch-icon.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="Assets/client/images/apple-touch-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="Assets/client/images/apple-touch-icon-114x114.png">
+    <link rel="shortcut icon" href="/Assets/client/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/Assets/client/images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/Assets/client/images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/Assets/client/images/apple-touch-icon-114x114.png">
 
     <!-- ==============================================
     CSS VENDOR
     =============================================== -->
-    <link rel="stylesheet" type="text/css" href="Assets/client/css/vendor/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="Assets/client/css/vendor/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="Assets/client/css/vendor/owl.carousel.min.css">
-    <link rel="stylesheet" type="text/css" href="Assets/client/css/vendor/owl.theme.default.min.css">
-    <link rel="stylesheet" type="text/css" href="Assets/client/css/vendor/magnific-popup.css">
+    <link rel="stylesheet" type="text/css" href="/Assets/client/css/vendor/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/Assets/client/css/vendor/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/Assets/client/css/vendor/owl.carousel.min.css">
+    <link rel="stylesheet" type="text/css" href="/Assets/client/css/vendor/owl.theme.default.min.css">
+    <link rel="stylesheet" type="text/css" href="/Assets/client/css/vendor/magnific-popup.css">
 
     <!-- ==============================================
     Google Fonts
@@ -39,8 +39,8 @@
     Custom Stylesheet
     =============================================== -->
 
-    <link rel="stylesheet" type="text/css" href="Assets/client/css/style.css" />
-    <script type="text/javascript" src="Assets/client/js/vendor/modernizr.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/Assets/client/css/style.css" />
+    <script type="text/javascript" src="/Assets/client/js/vendor/modernizr.min.js"></script>
 
 </head>
 
@@ -91,7 +91,9 @@
 
     @{Html.RenderAction("Header", "Home"); }
 
-    @RenderBody()
+    <div>
+        @RenderBody()
+    </div>
 
     <!-- FOOTER SECTION -->
     <div class="footer">
@@ -101,8 +103,7 @@
             <div class="row">
                 <div class="col-sm-3 col-md-3">
                     <div class="footer-item">
-                        <img src="Assets/client/images/logo-bottom.png" alt="logo bottom">
-                        <p>This template is a micro niche for business categories, namely Insure - Insurance Company HTML Template. there was an excess of this template is using HTML/CSS.</p>
+                        <img src="/Assets/client/images/logo-bottom.png" alt="logo bottom">
                         <div class="footer-sosmed">
                             <a href="#" title="">
                                 <div class="item">
@@ -193,30 +194,20 @@
             </div>
         </div>
 
-        <div class="fcopy">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-12 col-md-12">
-                        <p class="ftex">&copy; 2017 Insure by Rudhi Sasmito - All Rights Reserved</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
     </div>
 
     <!-- JS VENDOR -->
-    <script type="text/javascript" src="Assets/client/js/vendor/jquery.min.js"></script>
-    <script type="text/javascript" src="Assets/client/js/vendor/bootstrap.min.js"></script>
-    <script type="text/javascript" src="Assets/client/js/vendor/jquery.superslides.js"></script>
-    <script type="text/javascript" src="Assets/client/js/vendor/owl.carousel.js"></script>
-    <script type="text/javascript" src="Assets/client/js/vendor/bootstrap-hover-dropdown.min.js"></script>
-    <script type="text/javascript" src="Assets/client/js/vendor/jquery.magnific-popup.min.js"></script>
+    <script type="text/javascript" src="/Assets/client/js/vendor/jquery.min.js"></script>
+    <script type="text/javascript" src="/Assets/client/js/vendor/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/Assets/client/js/vendor/jquery.superslides.js"></script>
+    <script type="text/javascript" src="/Assets/client/js/vendor/owl.carousel.js"></script>
+    <script type="text/javascript" src="/Assets/client/js/vendor/bootstrap-hover-dropdown.min.js"></script>
+    <script type="text/javascript" src="/Assets/client/js/vendor/jquery.magnific-popup.min.js"></script>
     <!-- sendmail -->
-    <script type="text/javascript" src="Assets/client/js/vendor/validator.min.js"></script>
-    <script type="text/javascript" src="Assets/client/js/vendor/form-scripts.js"></script>
+    <script type="text/javascript" src="/Assets/client/js/vendor/validator.min.js"></script>
+    <script type="text/javascript" src="/Assets/client/js/vendor/form-scripts.js"></script>
 
-    <script type="text/javascript" src="Assets/client/js/script.js"></script>
+    <script type="text/javascript" src="/Assets/client/js/script.js"></script>
 
 </body>
 

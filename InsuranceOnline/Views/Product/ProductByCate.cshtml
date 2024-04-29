@@ -1,0 +1,110 @@
+﻿@model List<Insurance.Data.Models.Product>
+@using Common;
+@{
+    var category = ViewBag.Category;
+    ViewBag.Title = "Các gói " + category.Name;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- BANNER -->
+<div class="section banner-page pages">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-12">
+                <div class="title-page">Bảng giá</div>
+                <ol class="breadcrumb">
+                    <li><a href="#">@category.Name</a></li>
+                    <li class="active">Bảng giá</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Page -->
+<div class="section pricing-table section-border">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-sm-10 col-md-10">
+                <h2 class="section-heading">
+                    Các gói bảo hiểm của chúng tôi
+                </h2>
+                <p>Dưới đây là các gói @category.Name, hãy lựa chọn gói phù hợp với nhu cầu của bạn.</p>
+                <div class="margin-bottom-70"></div>
+            </div>
+            @if (Model.Count > 0)
+            {
+                foreach (var item in Model)
+                {
+                    string type = "";
+                    if (item.ExpireType == 0)
+                    {
+                        type = "tháng";
+                    }
+                    if (item.ExpireType == 1)
+                    {
+                        type = "năm";
+                    }
+                <div class="col-sm-4 col-md-4">
+                    <!-- ITEM 1 -->
+                    <div class="panel panel-pricing">
+                        <header class="panel-heading">
+                            <h3>@item.Name</h3>
+                            <div class="price">
+                                @StringHelper.FormatCurrency(@item.Price)<small>/ @item.ExpireTime @type</small>
+                            </div>
+                        </header>
+                        <div class="panel-body">
+                            <p>@Html.Raw(@item.Description)</p>
+                        </div>
+                        <div class="panel-footer">
+                            @if ((InsuranceOnline.Common.UserLogin)Session[CommonConstants.USER_SESSION] == null)
+                            {
+                                <a href="/dang-nhap" class="btn btn-secondary">Mua ngay</a>
+                            }
+                            else
+                            {
+                                <a href="#" class="btn btn-secondary">Mua ngay</a>
+                            }
+                        </div>
+                    </div>
+                </div>
+                }
+            }
+            else
+            {
+                <div class="col-sm-12 col-md-12">Không có gói bảo hiểm nào.</div>
+            }
+
+
+        </div>
+
+    </div>
+</div>
+
+<!-- AGENT -->
+<div class="section testimony">
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-sm-6 col-md-3 col-md-offset-2">
+                <div class="people">
+                    <img class="user-pic" src="/Assets/client/images/say-img-2.jpg" alt="">
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-5 col-md-offset-1">
+
+                <div class="margin-bottom-70"></div>
+                <h2 class="title-agent">Select Your Agents Now!</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <a href="#" class="btn btn-secondary" title="OUR COMPANY">FIND AN AGENTS</a>
+                <div class="margin-bottom-50"></div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+

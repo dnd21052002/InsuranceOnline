@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -34,6 +35,19 @@ namespace Common
                 str2 = str2.Replace("--", "-").ToLower();
             }
             return str2;
+        }
+
+        public static string FormatCurrency(decimal value)
+        {
+            CultureInfo culture = new CultureInfo("vi-VN"); // Sử dụng ngôn ngữ và vùng miền Việt Nam
+            var a = value.ToString("C0", culture).Replace(" ", ""); // "C0" định dạng số tiền
+            return a;
+        }
+
+        public static string FormatDiscountPercentage(decimal discountPercentage)
+        {
+            int roundedPercentage = (int)Math.Floor(discountPercentage);
+            return roundedPercentage.ToString() + "%";
         }
     }
 }

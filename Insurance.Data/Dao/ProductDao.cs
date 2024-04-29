@@ -24,6 +24,11 @@ namespace Insurance.Data.Dao
             return db.Products.Include("ProductCategory").OrderBy(p => p.ID).ToList();
         }
 
+        public List<Product> ListByCategory(int id)
+        {
+            return db.Products.Where(x => x.CategoryID == id).OrderBy(x => x.ID).ToList();
+        }
+
         public IEnumerable<Product> ListAllPaging(string searchString, int page, int pageSize)
         {
             IQueryable<Product> model = db.Products;

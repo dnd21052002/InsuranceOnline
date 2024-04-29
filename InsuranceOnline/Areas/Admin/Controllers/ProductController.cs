@@ -55,7 +55,9 @@ namespace InsuranceOnline.Areas.Admin.Controllers
         public ActionResult Edit(long id)
         {
             var product = new ProductDao().ViewDetail(id);
-            SetViewBag(product.CategoryID);
+            var categories = new ProductCategoryDao().ListAll();
+            SelectList categoryList = new SelectList(categories, "ID", "Name", product.CategoryID);
+            ViewBag.CategoryList = categoryList;
             SetViewBag(product.ExpireType);
             return View(product);
         }

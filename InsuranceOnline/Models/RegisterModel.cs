@@ -12,6 +12,9 @@ namespace InsuranceOnline.Models
         [Required(ErrorMessage = "Bạn chưa nhập email")]
         [EmailAddress(ErrorMessage = "Email không hợp lệ")]
         public string Email { get; set; }
+
+        [Display(Name = "Tên đăng nhập")]
+        [Required(ErrorMessage = "Bạn chưa nhập tên đăng nhập")]
         public string UserName { get; set; }
         [Display(Name = "Mật khẩu")]
         [Required(ErrorMessage = "Bạn chưa nhập mật khẩu")]
