@@ -56,8 +56,7 @@ namespace InsuranceOnline.Areas.Admin.Controllers
         {
             var product = new ProductDao().ViewDetail(id);
             var categories = new ProductCategoryDao().ListAll();
-            SetViewBag(product.CategoryID);
-            SetViewBag(product.ExpireType);
+            SetViewBag(product.CategoryID, product.ExpireType);
             return View(product);
         }
 
@@ -79,8 +78,7 @@ namespace InsuranceOnline.Areas.Admin.Controllers
                     ModelState.AddModelError("", "Cập nhật sản phẩm không thành công");
                 }
             }
-            SetViewBag(product.CategoryID);
-            SetViewBag(product.ExpireType);
+            SetViewBag(product.CategoryID, product.ExpireType);
             return View();
         }
 
@@ -101,17 +99,17 @@ namespace InsuranceOnline.Areas.Admin.Controllers
             }
         }
 
-        public void SetViewBag(long? selectedId = null)
+        public void SetViewBag(long? selectedCategoryId = null, int? selectedExpireTypeId = null)
         {
-            var dao = new ProductCategoryDao();
-            ViewBag.CategoryID = new SelectList(dao.ListAll(), "ID", "Name", null);
-            var expireTypes = new List<SelectListItem>
+            var categoryDao = new ProductCategoryDao();
+            ViewBag.CategoryID = new SelectList(categoryDao.ListAll(), "ID", "Name", selectedCategoryId);
+
+            var expireTypeList = new List<SelectListItem>
             {
                 new SelectListItem { Text = "Tháng", Value = "0" },
                 new SelectListItem { Text = "Năm", Value = "1" }
             };
-
-            ViewBag.ExpireType = new SelectList(expireTypes, "Value", "Text", null);
+            ViewBag.ExpireType = new SelectList(expireTypeList, "Value", "Text", selectedExpireTypeId);
         }
     }
 }

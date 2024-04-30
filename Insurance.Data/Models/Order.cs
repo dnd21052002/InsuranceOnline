@@ -15,7 +15,7 @@ namespace Insurance.Data.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { set; get; }
 
-        [Required]
+        [Required(ErrorMessage = "vui lòng nhập Tên khách hàng")]
         [MaxLength(256)]
         public string CustomerName { set; get; }
 
