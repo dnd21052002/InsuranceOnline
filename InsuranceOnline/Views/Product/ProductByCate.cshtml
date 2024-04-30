@@ -2,6 +2,7 @@
 @using Common;
 @{
     var category = ViewBag.Category;
+    var listCate = ViewBag.ListCategory;
     ViewBag.Title = "Các gói " + category.Name;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -61,11 +62,11 @@
                         <div class="panel-footer">
                             @if ((InsuranceOnline.Common.UserLogin)Session[CommonConstants.USER_SESSION] == null)
                             {
-                                <a href="/dang-nhap" class="btn btn-secondary">Mua ngay</a>
+                                <a href="@Url.Action("Login","User", new {returnUrl = ViewBag.ReturnUrl})" class="btn btn-secondary">Mua ngay</a>
                             }
                             else
                             {
-                                <a href="#" class="btn btn-secondary">Mua ngay</a>
+                                <a href="#" data-id="@item.ID" class="btn btn-secondary btnAddToCart">Mua ngay</a>
                             }
                         </div>
                     </div>
@@ -88,22 +89,21 @@
     <div class="container">
 
         <div class="row">
-
-            <div class="col-sm-6 col-md-3 col-md-offset-2">
-                <div class="people">
-                    <img class="user-pic" src="/Assets/client/images/say-img-2.jpg" alt="">
+            <h3>Tham khảo các gói bảo hiểm khác</h3>
+            @foreach (var item in listCate)
+            {
+                <div class="col-sm-6 col-md-4">
+                    <div class="box-image-1">
+                        <div class="image">
+                            <a href="/bao-hiem/@item.Alias-@item.ID" title="House Insurance"><img src="@item.Image" alt="" class="img-responsive"></a>
+                        </div>
+                        <div class="description">
+                            <h3 class="blok-title">@item.Name</h3>
+                            <a href="/bao-hiem/@item.Alias-@item.ID" title="GET A QUOTE" class="btn btn-secondary">Chi tiết</a>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="col-sm-6 col-md-5 col-md-offset-1">
-
-                <div class="margin-bottom-70"></div>
-                <h2 class="title-agent">Select Your Agents Now!</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                <a href="#" class="btn btn-secondary" title="OUR COMPANY">FIND AN AGENTS</a>
-                <div class="margin-bottom-50"></div>
-
-            </div>
-
+            }
         </div>
     </div>
 </div>

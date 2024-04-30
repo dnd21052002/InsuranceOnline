@@ -28,13 +28,22 @@ namespace InsuranceOnline.Controllers
 
         public ActionResult ProductByCate(int id)
         {
+            var returnUrl = Request.Url.PathAndQuery;
+            if (returnUrl.Contains("/dang-nhap"))
+            {
+                ViewBag.ReturnUrl = "";
+            }
+            else
+            {
+                ViewBag.ReturnUrl = returnUrl;
+            }
             var dao = new ProductDao();
 
             var model = dao.ListByCategory(id);
 
             ViewBag.Category = new ProductCategoryDao().ViewDetail(id);
 
-            ViewBag.ListCategory = new ProductCategoryDao().ListAll();
+            ViewBag.ListCategory = new ProductCategoryDao().ListAll().Where(c => c.ID != id).Take(6);
 
             return View(model);
         }

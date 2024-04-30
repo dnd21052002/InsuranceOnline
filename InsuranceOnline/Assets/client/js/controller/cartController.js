@@ -3,6 +3,25 @@
         cart.regEvents();
     }
     , regEvents: function () {
+
+        $('.btnAddToCart').off('click').on('click', function (e) {
+            e.preventDefault();
+            var productID = $(this).data('id');
+            $.ajax({
+                url: '/Cart/Add',
+                data: {
+                    productId: productID,
+                },
+                type: 'POST',
+                dataType: 'json',
+                success: function (res) {
+                    if (res.status == true) {
+                        alert('Thêm sản phẩm thành công');
+                    }
+                }
+            })
+        });
+
         $('#btnContinue').off('click').on('click',function () {
             window.location.href = "/";
         });
@@ -47,7 +66,7 @@
         $('.btn-delete').off('click').on('click', function (e) {
             e.preventDefault();
             $.ajax({
-                url: '/Cart/Delete',
+                url: '/Cart/DeleteItem',
                 data: { id: $(this).data('id') },
                 dataType: 'json',
                 type: 'POST',

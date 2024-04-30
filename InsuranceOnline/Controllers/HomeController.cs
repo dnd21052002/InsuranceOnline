@@ -33,7 +33,7 @@ namespace InsuranceOnline.Controllers
         public ActionResult ProductCat()
         {
             var productCateDao = new ProductCategoryDao();
-            var listProductCate = productCateDao.ListAll();
+            var listProductCate = productCateDao.ListAll().Take(6);
 
             return PartialView(listProductCate);
         }

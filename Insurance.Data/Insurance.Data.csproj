@@ -55,6 +55,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dao\AdminUserDao.cs" />
+    <Compile Include="Dao\CartDao.cs" />
+    <Compile Include="Dao\CartItemDao.cs" />
     <Compile Include="Dao\CustomerUserDao.cs" />
     <Compile Include="Dao\OrderDao.cs" />
     <Compile Include="Dao\ProductCategoryDao.cs" />
