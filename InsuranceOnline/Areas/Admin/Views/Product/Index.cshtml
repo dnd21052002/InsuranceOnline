@@ -43,7 +43,7 @@
                     <tr id="row_@item.ID">
                         <td>@item.Name</td>
                         <td>@(item.ProductCategory != null ? item.ProductCategory.Name : "")</td>
-                        <td>@item.Price</td>
+                        <td>@Common.StringHelper.FormatCurrency(item.Price)</td>
                         <td>
                             @if (item.ExpireType == 0)
                             {

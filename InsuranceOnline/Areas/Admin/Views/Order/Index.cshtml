@@ -1,0 +1,79 @@
+﻿@model PagedList.PagedList<Insurance.Data.Models.Order>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section header{
+    Danh mục đơn hàng
+}
+
+<div class="card mb-4">
+    <div class="panel-body mt-3 ms-3">
+        @using (Html.BeginForm("Index", "Order", FormMethod.Get))
+        {
+            <div class="form-group">
+                <div class="col-lg-12 d-flex">
+                    <div class="col-md-4 me-2">
+                        <input type="text" placeholder="từ khoá tìm kiếm..." value="@ViewBag.SearchString" class="form-control" name="searchString" />
+                    </div>
+                    <div class="col-md-4">
+                        <button type="submit" class="btn btn-success">Tìm kiếm</button>
+                        @*<a class="btn btn-primary" href="/Admin/Order/Create">Thêm mới</a>*@
+                    </div>
+                </div>
+            </div>
+        }
+        <table id="datatablesSimple">
+            <thead>
+                <tr>
+                    <th>Mã đơn</th>
+                    <th>Tên khách hàng</th>
+                    <th>Số điện thoại</th>
+                    <th>Ngày đặt</th>
+                    <th>Tổng tiền</th>
+                    <th style="width: 10%">Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr id="row_@item.ID">
+                        <td>@item.ID</td>
+                        <td>@item.CustomerName</td>
+                        <td>@item.CustomerMobile</td>
+                        <td>@(item.CreatedDate.HasValue ? item.CreatedDate.Value.ToString("dd/MM/yyyy") : string.Empty)</td>
+
+                        <td>@Common.StringHelper.FormatCurrency(item.TotalPrice)</td>
+
+                        <td>
+                            <a class="text-success" href="/Admin/Order/Detail/@item.ID"><i class="fas fa-eye"></i></a>
+                            |
+                            <a class="text-secondary" href="/Admin/Order/Edit/@item.ID"><i class="fas fa-pencil-alt"></i></a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+    </div>
+</div>
+
+<script>
+    $('.deleteBtn').on('click', function (e) {
+        e.preventDefault();
+        var id = $(this).data('id');
+        if (confirm('Bạn có chắc chắn muốn xóa không?')) {
+            $.ajax({
+                url: '/Admin/Order/Delete/' + id,
+                type: 'POST',
+                success: function (data) {
+                    $('#row_' + id).remove();
+                    //cập nhật lại trang
+                    location.reload();
+                }
+            });
+        }
+    });
+</script>
