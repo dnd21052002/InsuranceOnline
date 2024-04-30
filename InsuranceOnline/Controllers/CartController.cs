@@ -27,7 +27,7 @@ namespace InsuranceOnline.Controllers
 
             if (Session[CommonConstants.USER_SESSION] == null)
             {
-                return RedirectToAction("Login", "User", new {returnUrl = returnUrl1 });
+                return RedirectToAction("Login", "User", new { returnUrl = returnUrl1 });
             }
             var cartDao = new CartDao();
             var cartItemDao = new CartItemDao();
@@ -39,13 +39,8 @@ namespace InsuranceOnline.Controllers
             if (cart != null)
             {
                 listCartItem = cartItemDao.GetByCart(cart.Id);
-                foreach (var item in listCartItem)
-                {
-                    listProduct.Add(productDao.ViewDetail(item.ProductID));
-                }
-                ViewBag.ListProduct = listProduct;
             }
-            
+
             return View(listCartItem);
         }
 
@@ -91,7 +86,7 @@ namespace InsuranceOnline.Controllers
         [HttpPost]
         public JsonResult DeleteItem(int id)
         {
-            if(Session[CommonConstants.USER_SESSION] != null)
+            if (Session[CommonConstants.USER_SESSION] != null)
             {
                 new CartItemDao().Delete(id);
                 return Json(new
@@ -129,6 +124,111 @@ namespace InsuranceOnline.Controllers
                     status = false
                 });
             }
+        }
+
+        public ActionResult Checkout()
+        {
+            var returnUrl1 = Request.Url.PathAndQuery;
+            if (returnUrl1.Contains("/dang-nhap"))
+            {
+                ViewBag.ReturnUrl = "";
+            }
+            else
+            {
+                ViewBag.ReturnUrl = returnUrl1;
+            }
+
+            if (Session[CommonConstants.USER_SESSION] == null)
+            {
+                return RedirectToAction("Login", "User", new { returnUrl = returnUrl1 });
+            }
+            var cartDao = new CartDao();
+            var cartItemDao = new CartItemDao();
+            var productDao = new ProductDao();
+            var userSession = (UserLogin)Session[CommonConstants.USER_SESSION];
+            var cart = cartDao.GetByUser(userSession.UserID);
+            var listCartItem = new List<CartItem>();
+            var listProduct = new List<Product>();
+            if (cart != null)
+            {
+                listCartItem = cartItemDao.GetByCart(cart.Id);
+            }
+
+            return View(listCartItem);
+        }
+
+        [HttpPost]
+        public ActionResult Checkout(string name, string address, string phone, string email, string identity)
+        {
+            var returnUrl1 = Request.Url.PathAndQuery;
+            if (returnUrl1.Contains("/dang-nhap"))
+            {
+                ViewBag.ReturnUrl = "";
+            }
+            else
+            {
+                ViewBag.ReturnUrl = returnUrl1;
+            }
+
+            if (Session[CommonConstants.USER_SESSION] == null)
+            {
+                return RedirectToAction("Login", "User", new { returnUrl = returnUrl1 });
+            }
+            try
+            {
+                var cartDao = new CartDao();
+                var cartItemDao = new CartItemDao();
+                var productDao = new ProductDao();
+                var userSession = (UserLogin)Session[CommonConstants.USER_SESSION];
+                var cart = cartDao.GetByUser(userSession.UserID);
+                var listCartItem = new List<CartItem>();
+                var listProduct = new List<Product>();
+                if (cart != null)
+                {
+                    listCartItem = cartItemDao.GetByCart(cart.Id);
+                }
+
+                var order = new Order
+                {
+                    CustomerName = name,
+                    CustomerIdentity = identity,
+                    CustomerAddress = address,
+                    CustomerMobile = phone,
+                    CustomerEmail = email,
+                    CreatedDate = DateTime.Now,
+                    Status = true,
+                    CustomerID = (int)userSession.UserID,
+                    TotalPrice = listCartItem.Sum(x => x.Product.Price * x.Quantity),
+                    PaymentStatus = "Chờ xác nhận",
+                };
+                var orderId = new OrderDao().Insert(order);
+                foreach (var item in listCartItem)
+                {
+                    var orderDetail = new OrderDetail
+                    {
+                        OrderID = orderId,
+                        ProductID = item.ProductID
+                    };
+                    new OrderDetailDao().Insert(orderDetail);
+                }
+                cartDao.Delete(cart.Id);
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("CheckoutError", "Cart");
+            }
+
+            return RedirectToAction("CheckoutSuccess", "Cart");
+        }
+
+        public ActionResult CheckoutSuccess()
+        {
+            return View();
+        }
+
+        public ActionResult CheckoutError()
+        {
+            return View();
         }
     }
 }

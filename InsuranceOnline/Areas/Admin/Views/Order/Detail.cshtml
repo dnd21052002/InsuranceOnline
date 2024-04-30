@@ -1,9 +1,7 @@
 ﻿@model List<Insurance.Data.Models.OrderDetail>
 @{
     ViewBag.Title = "Detail";
-    var productQuantities = ViewBag.ProductQuantities as List<dynamic>;
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
-    int? lastOrderId = null;
 }
 
 @section header{
@@ -13,7 +11,7 @@
 <table class="table table-striped">
     <thead>
         <tr>
-            <th>Mã đơn hàng</th>
+            <th>Loại bảo hiểm</th>
             <th>Tên sản phẩm</th>
             <th>Giá tiền</th>
         </tr>
@@ -21,24 +19,13 @@
     <tbody>
         @foreach (var item in Model.OrderBy(m => m.OrderID))
         {
-            if (lastOrderId != item.OrderID)
-            {
-                <tr>
-                    <td>@item.OrderID</td>
-                    <td>@item.Product.Name</td>
-                    <td>@(Common.StringHelper.FormatCurrency(item.Product.Price))</td>
-                </tr>
-                lastOrderId = item.OrderID;
-            }
-            else
-            {
-
-                <tr>
-                    <td></td>
-                    <td>@item.Product.Name</td>
-                    <td>@(Common.StringHelper.FormatCurrency(item.Product.Price))</td>
-                </tr>
-            }
+            <tr>
+                <td>@item.Product.ProductCategory.Name</td>
+                <td>@item.Product.Name</td>
+                <td>@(Common.StringHelper.FormatCurrency(item.Product.Price))</td>
+            </tr>
         }
     </tbody>
 </table>
+
+<a href="/Admin/Order" class="btn btn-primary">Quay lại</a>
