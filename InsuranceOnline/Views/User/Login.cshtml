@@ -6,7 +6,7 @@
 
 <!-- Login 13 - Bootstrap Brain Component -->
 <div class="container" style="margin-top: 30px; margin-bottom: 30px">
-    @using (Html.BeginForm("Login", "User", FormMethod.Post))
+    @using (Html.BeginForm("Login", "User", new { returnUrl = ViewBag.ReturnUrl }, FormMethod.Post))
     {
         @Html.AntiForgeryToken()
 

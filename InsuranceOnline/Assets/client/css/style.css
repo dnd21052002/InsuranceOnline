@@ -773,17 +773,19 @@ ul.checklist {
   border-radius: 3; }
 
 .btn-default {
-  background-color: #f6ba18;
+  background-color: #686868;
   color: #ffffff;
   padding: 15px 20px;
   border: 0;
-  -webkit-border-radius: 0;
-  -moz-border-radius: 0;
-  -ms-border-radius: 0;
-  border-radius: 0; }
+  -webkit-border-radius: 3;
+  -moz-border-radius: 3;
+  -ms-border-radius: 3;
+  border-radius: 3; }
 
 .btn-default:hover {
-  background-color: #12aaeb; }
+  background-color: #555555;
+  color: #ffffff; 
+}
 
 .btn-orange-cta {
   background-color: #f6ba18;

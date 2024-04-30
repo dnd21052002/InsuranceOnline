@@ -19,13 +19,23 @@ namespace InsuranceOnline.Controllers
             return View();
         }
 
-        public ActionResult Login()
+        public ActionResult Login(string returnUrl)
         {
+            if (returnUrl == null)
+            {
+                return View();
+            }
+            else
+            {
+                ViewBag.Message = "Vui lòng đăng nhập để tiếp tục";
+            }
+
+            ViewBag.ReturnUrl = returnUrl;
             return View();
         }
 
         [HttpPost]
-        public ActionResult Login(LoginModel model)
+        public ActionResult Login(LoginModel model, string returnUrl)
         {
             if(ModelState.IsValid)
             {
@@ -41,7 +51,14 @@ namespace InsuranceOnline.Controllers
                         UserID = user.Id
                     };
                     Session.Add(CommonConstants.USER_SESSION, userSession);
-                    return Redirect("/");
+                    if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+                    {
+                        return Redirect(returnUrl);
+                    }
+                    else
+                    {
+                        return Redirect("/");
+                    }
                 }
 
                 else if(result == 0)

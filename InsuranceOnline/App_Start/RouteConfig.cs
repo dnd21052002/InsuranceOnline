@@ -14,6 +14,13 @@ namespace InsuranceOnline
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "Cart",
+                url: "gio-hang",
+                defaults: new { controller = "Cart", action = "Index", id = UrlParameter.Optional },
+                namespaces: new[] { "InsuranceOnline.Controllers" }
+            );
+
+            routes.MapRoute(
                 name: "Register",
                 url: "dang-ky",
                 defaults: new { controller = "User", action = "Register", id = UrlParameter.Optional },
