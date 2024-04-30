@@ -1,0 +1,75 @@
+﻿@model List<Insurance.Data.Models.CartItem>
+@{
+    ViewBag.Title = "Thanh toán";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="section">
+    <div class="container">
+        @if (Model.Count > 0)
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <td>Mã SP</td>
+                        <td>Loại bảo hiểm</td>
+                        <td>Tên SP</td>
+                        <td>Đơn giá</td>
+                        <td>#</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="align-top">@item.Product.ID</td>
+                            <td class="align-top">@item.Product.ProductCategory.Name</td>
+                            <td class="align-top">@item.Product.Name</td>
+                            <td class="align-top">@item.Product.Price.ToString("N0") vnđ</td>
+                            <td><a href="#" class="btn-delete" data-id="@item.ID">Xoá</a></td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+
+            <button id="btnContinue" class="btn btn-default">Tiếp tục mua hàng</button>
+            <button id="btnDeleteAll" class="btn btn-danger">Xoá giỏ hàng</button>
+        }
+        else
+        {
+            <span class="alert alert-danger">Chưa có sản phẩm nào trong giỏ hàng</span>
+        }
+    </div>
+
+    @if(Model.Count > 0)
+    {
+        <div class="container">
+            @using (Html.BeginForm("Checkout", "Cart", FormMethod.Post))
+            {
+                <div class="form-group">
+                    <label>Người nhận</label>
+                    <input name="name" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label>Số CCCD/CMND</label>
+                    <input name="identity" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label>Điện thoại</label>
+                    <input name="phone" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label>Địa chỉ</label>
+                    <input name="address" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input name="email" class="form-control" />
+                </div>
+                <button type="submit" class="btn btn-success">Thanh toán</button>
+            }
+        </div>
+    }
+</div>
+

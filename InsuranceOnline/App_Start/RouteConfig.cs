@@ -21,6 +21,27 @@ namespace InsuranceOnline
             );
 
             routes.MapRoute(
+                name: "Checkout",
+                url: "thanh-toan",
+                defaults: new { controller = "Cart", action = "Checkout", id = UrlParameter.Optional },
+                namespaces: new[] { "InsuranceOnline.Controllers" }
+            );
+
+            routes.MapRoute(
+                name: "CheckoutSuccess",
+                url: "thanh-toan/thanh-cong",
+                defaults: new { controller = "Cart", action = "CheckoutSuccess", id = UrlParameter.Optional },
+                namespaces: new[] { "InsuranceOnline.Controllers" }
+            );
+
+            routes.MapRoute(
+                name: "CheckoutError",
+                url: "thanh-toan/that-bai",
+                defaults: new { controller = "Cart", action = "CheckoutError", id = UrlParameter.Optional },
+                namespaces: new[] { "InsuranceOnline.Controllers" }
+            );
+
+            routes.MapRoute(
                 name: "Register",
                 url: "dang-ky",
                 defaults: new { controller = "User", action = "Register", id = UrlParameter.Optional },
