@@ -46,12 +46,12 @@
                 </li>
 
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false">VỀ CHÚNG TÔI <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false">GÓI BẢO HIỂM <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="about-company.html">OUR COMPANY</a></li>
-                        <li><a href="about-history.html">COMPANY HISTORY</a></li>
-                        <li><a href="about-team.html">OUR TEAM</a></li>
-                        <li><a href="about-partners.html">OUR PARTNERS</a></li>
+                        @foreach (var item in Model)
+                        {
+                            <li><a href="/goi-bao-hiem/@item.Alias-@item.ID">@item.Name</a></li>
+                        }
                     </ul>
                 </li>
 
