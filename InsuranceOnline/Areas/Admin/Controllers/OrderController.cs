@@ -22,7 +22,7 @@ namespace InsuranceOnline.Areas.Admin.Controllers
 
         public ActionResult Detail(long id)
         {
-            var orderDetails = new OrderDao().GetOrderDetailsByOrderId(id);
+            var orderDetails = new OrderDetailDao().GetOrderDetailsByOrderId(id);
             var productQuantities = orderDetails
                                 .GroupBy(od => od.ProductID)
                                 .Select(group => new
@@ -76,12 +76,6 @@ namespace InsuranceOnline.Areas.Admin.Controllers
         [ValidateInput(false)]
         public ActionResult Edit(Order order)
         {
-            ModelState.Remove("CustomerName");
-            ModelState.Remove("CustomerAddress");
-            ModelState.Remove("CustomerEmail");
-            ModelState.Remove("CustomerIdentity");
-            ModelState.Remove("CustomerMobile");
-            ModelState.Remove("PaymentStatus");
             if (ModelState.IsValid)
             {
                 var dao = new OrderDao();

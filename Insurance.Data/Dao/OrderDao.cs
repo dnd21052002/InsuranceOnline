@@ -48,6 +48,14 @@ namespace Insurance.Data.Dao
             var order = db.Orders.Find(entity.ID);
             if (order != null)
             {
+                order.CustomerName = entity.CustomerName;
+                order.CustomerAddress = entity.CustomerAddress;
+                order.CustomerEmail = entity.CustomerEmail;
+                order.CustomerIdentity = entity.CustomerIdentity;
+                order.CustomerMobile = entity.CustomerMobile;
+                order.CustomerMessage = entity.CustomerMessage;
+                order.CreatedDate = entity.CreatedDate;
+                order.PaymentStatus = entity.PaymentStatus;
                 order.Status = entity.Status;
                 order.TotalPrice = entity.TotalPrice;
                 db.SaveChanges();
@@ -72,16 +80,6 @@ namespace Insurance.Data.Dao
             {
                 return false;
             }
-        }
-
-        public List<OrderDetail> GetOrderDetailsByOrderId(long orderId)
-        {
-            var orderDetailsList = db.OrderDetails
-                                           .Where(od => od.OrderID == orderId)
-                                           .Include(od => od.Product)
-                                           .ToList();
-
-            return orderDetailsList;
         }
     }
 }

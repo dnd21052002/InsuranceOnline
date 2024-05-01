@@ -15,9 +15,50 @@
 
     <div class="form-horizontal mx-5">
         <hr />
-        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.ID)
-
+        <div class="form-group mb-2">
+            @Html.LabelFor(model => model.CustomerName, "Người nhận hàng", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CustomerName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CustomerName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group mb-2">
+            @Html.LabelFor(model => model.CustomerAddress, "Địa chỉ nhận hàng", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CustomerAddress, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CustomerAddress, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group mb-2">
+            @Html.LabelFor(model => model.CustomerEmail, "Email khách hàng", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CustomerEmail, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CustomerEmail, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group mb-2">
+            @Html.LabelFor(model => model.CustomerMobile, "Số điện thoại khách hàng", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CustomerMobile, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CustomerMobile, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group mb-2">
+            @Html.LabelFor(model => model.CustomerIdentity, "Số CMND/CCCD", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CustomerIdentity, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CustomerIdentity, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group mb-2">
+            @Html.LabelFor(model => model.CustomerMessage, "Ghi chú", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CustomerMessage, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CustomerMessage, "", new { @class = "text-danger" })
+            </div>
+        </div>
         <div class="form-group mb-2">
             @Html.LabelFor(model => model.TotalPrice, "Tổng tiền", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -25,21 +66,39 @@
                 @Html.ValidationMessageFor(model => model.TotalPrice, "", new { @class = "text-danger" })
             </div>
         </div>
-
         <div class="form-group mb-2">
-            @Html.LabelFor(model => model.Status, "Trạng thái", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.PaymentStatus, "Thanh toán", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <label class="radio-inline d-block">
-                    @Html.RadioButtonFor(model => model.Status, true) Đã thanh toán
+                    @Html.RadioButtonFor(model => model.PaymentStatus, "Đã thanh toán") Đã thanh toán
                 </label>
                 <label class="radio-inline d-block">
-                    @Html.RadioButtonFor(model => model.Status, false) Chưa thanh toán
+                    @Html.RadioButtonFor(model => model.PaymentStatus, "Chưa thanh toán") Chưa thanh toán
+                </label>
+                @Html.ValidationMessageFor(model => model.PaymentStatus, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group mb-2">
+            @Html.LabelFor(model => model.Status, "Trạng thái đơn hàng", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <label class="radio-inline d-block">
+                    @Html.RadioButtonFor(model => model.Status, true) Thành công
+                </label>
+                <label class="radio-inline d-block">
+                    @Html.RadioButtonFor(model => model.Status, false) không thành công
                 </label>
                 @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
             </div>
         </div>
+        <div class="form-group mb-2">
+            <p>Chi tiết sản phẩm:</p>
+            <div class="col-md-10">
+                <a href="/Admin/Order/Detail/@Model.ID" class="btn btn-default btn-dark">Xem</a>
+            </div>
+        </div>
 
-        <div class="form-group my-2">
+        <div class="form-group my-2 text-end pe-5">
             <a href="/Admin/Order/Index" class="btn btn-default btn-dark">Quay lại</a>
             <button type="submit" value="Tạo mới" class="btn btn-default btn-success">Cập nhật</button>
         </div>

@@ -15,24 +15,24 @@ namespace Insurance.Data.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { set; get; }
 
-        [Required(ErrorMessage = "vui lòng nhập Tên khách hàng")]
+        [Required(ErrorMessage = "vui lòng không để trống")]
         [MaxLength(256)]
         public string CustomerName { set; get; }
 
-        [Required]
+        [Required(ErrorMessage = "vui lòng không để trống")]
         [MaxLength(256)]
         public string CustomerAddress { set; get; }
 
-        [Required]
+        [Required(ErrorMessage = "vui lòng không để trống")]
         [MaxLength(256)]
         public string CustomerEmail { set; get; }
 
         //CMND
-        [Required]
+        [Required(ErrorMessage = "vui lòng không để trống")]
         [MaxLength(15)]
         public string CustomerIdentity { set; get; }
 
-        [Required]
+        [Required(ErrorMessage = "vui lòng không để trống")]
         [MaxLength(20)]
         public string CustomerMobile { set; get; }
 
@@ -46,7 +46,7 @@ namespace Insurance.Data.Models
 
         public string PaymentMethod { set; get; }
 
-        [Required]
+        [Required(ErrorMessage = "vui lòng không để trống")]
         public string PaymentStatus { set; get; }
 
         public bool Status { set; get; }

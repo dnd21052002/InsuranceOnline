@@ -1,6 +1,7 @@
 ﻿using Insurance.Data.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,6 +29,16 @@ namespace Insurance.Data.Dao
             {
                 return false;
             }
+        }
+
+        public List<OrderDetail> GetOrderDetailsByOrderId(long orderId)
+        {
+            var orderDetailsList = db.OrderDetails
+                                           .Where(od => od.OrderID == orderId)
+                                           .Include(od => od.Product)
+                                           .ToList();
+
+            return orderDetailsList;
         }
     }
 }
