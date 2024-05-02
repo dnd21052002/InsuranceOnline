@@ -7,13 +7,13 @@ namespace Insurance.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class initialInsuranceDb : IMigrationMetadata
+    public sealed partial class updateProductCus : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(initialInsuranceDb));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(updateProductCus));
         
         string IMigrationMetadata.Id
         {
-            get { return "202404231536422_initialInsuranceDb"; }
+            get { return "202405020307327_updateProductCus"; }
         }
         
         string IMigrationMetadata.Source

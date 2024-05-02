@@ -55,7 +55,6 @@ namespace Insurance.Data.Dao
                 order.CustomerMobile = entity.CustomerMobile;
                 order.CustomerMessage = entity.CustomerMessage;
                 order.CreatedDate = entity.CreatedDate;
-                order.PaymentStatus = entity.PaymentStatus;
                 order.Status = entity.Status;
                 order.TotalPrice = entity.TotalPrice;
                 db.SaveChanges();

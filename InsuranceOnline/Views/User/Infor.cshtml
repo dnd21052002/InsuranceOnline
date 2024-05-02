@@ -1,0 +1,43 @@
+﻿@model List<Insurance.Data.Models.ProductCustomer>
+@{
+    ViewBag.Title = "Thông tin cá nhân";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@* Hiển thị thông tin của sản phẩm *@
+
+
+<div class="section">
+    <div class="container">
+        <h2>Thông tin bảo hiểm bạn đã sở hữu</h2>
+        @if (Model.Count > 0)
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <td style="font-weight: bold">Loại bảo hiểm</td>
+                        <td style="font-weight: bold">Tên bảo hiểm</td>
+                        <td style="font-weight: bold">Thời gian mua</td>
+                        <td style="font-weight: bold">Hạn sử dụng</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="align-top">@item.Product.ProductCategory.Name</td>
+                            <td class="align-top">@item.Product.Name</td>
+                            <td class="align-top">@item.CreatedDate</td>
+                            <td class="align-top">@item.ExpireTime</td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <span class="alert alert-danger">Bạn chưa có bảo hiểm nào</span>
+        }
+    </div>
+</div>

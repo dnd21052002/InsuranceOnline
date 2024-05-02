@@ -7,13 +7,13 @@ namespace Insurance.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class updateStatus : IMigrationMetadata
+    public sealed partial class groupOneMigration : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(updateStatus));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(groupOneMigration));
         
         string IMigrationMetadata.Id
         {
-            get { return "202404240250074_updateStatus"; }
+            get { return "202405020210382_groupOneMigration"; }
         }
         
         string IMigrationMetadata.Source

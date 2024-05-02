@@ -46,9 +46,6 @@ namespace Insurance.Data.Models
 
         public string PaymentMethod { set; get; }
 
-        [Required(ErrorMessage = "vui lòng không để trống")]
-        public string PaymentStatus { set; get; }
-
         public bool Status { set; get; }
         public int CustomerID { set; get; }
 

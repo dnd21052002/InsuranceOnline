@@ -3,7 +3,7 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class initialInsuranceDb : DbMigration
+    public partial class groupOneMigration : DbMigration
     {
         public override void Up()
         {
@@ -71,19 +71,16 @@
                     {
                         ID = c.Int(nullable: false, identity: true),
                         Name = c.String(nullable: false, maxLength: 100),
-                        Alias = c.String(nullable: false, maxLength: 256),
                         CategoryID = c.Int(nullable: false),
-                        Image = c.String(maxLength: 256),
-                        MoreImages = c.String(storeType: "xml"),
                         Price = c.Decimal(nullable: false, precision: 18, scale: 2),
                         PromotionPrice = c.Decimal(precision: 18, scale: 2),
                         Warranty = c.Int(),
-                        Description = c.String(),
-                        Content = c.String(),
+                        Description = c.String(nullable: false),
                         HomeFlag = c.Boolean(),
                         HotFlag = c.Boolean(),
-                        ViewCount = c.Int(),
-                        Status = c.Int(nullable: false),
+                        ExpireType = c.Int(nullable: false),
+                        ExpireTime = c.Int(nullable: false),
+                        Status = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.ID)
                 .ForeignKey("dbo.ProductCategories", t => t.CategoryID, cascadeDelete: true)
@@ -95,11 +92,12 @@
                     {
                         ID = c.Int(nullable: false, identity: true),
                         Name = c.String(nullable: false, maxLength: 256),
-                        Alias = c.String(nullable: false, maxLength: 256),
+                        Alias = c.String(),
                         Description = c.String(),
                         DisplayOrder = c.Int(),
                         HomeFlag = c.Boolean(),
-                        Status = c.Int(nullable: false),
+                        Image = c.String(),
+                        Status = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.ID);
             
@@ -125,6 +123,7 @@
                         CustomerName = c.String(nullable: false, maxLength: 256),
                         CustomerAddress = c.String(nullable: false, maxLength: 256),
                         CustomerEmail = c.String(nullable: false, maxLength: 256),
+                        CustomerIdentity = c.String(nullable: false, maxLength: 15),
                         CustomerMobile = c.String(nullable: false, maxLength: 20),
                         CustomerMessage = c.String(),
                         CreatedDate = c.DateTime(),
@@ -132,7 +131,6 @@
                         TotalPrice = c.Decimal(nullable: false, precision: 18, scale: 2),
                         PaymentMethod = c.String(),
                         PaymentStatus = c.String(nullable: false),
-                        DiscountPercent = c.Int(nullable: false),
                         Status = c.Boolean(nullable: false),
                         CustomerID = c.Int(nullable: false),
                     })
@@ -140,10 +138,32 @@
                 .ForeignKey("dbo.CustomerUsers", t => t.CustomerID, cascadeDelete: true)
                 .Index(t => t.CustomerID);
             
+            CreateTable(
+                "dbo.ProductCustomers",
+                c => new
+                    {
+                        ID = c.Int(nullable: false, identity: true),
+                        ProductID = c.Int(nullable: false),
+                        CustomerID = c.Int(nullable: false),
+                        CreatedDate = c.DateTime(nullable: false),
+                        CreatedBy = c.String(),
+                        UpdatedDate = c.DateTime(),
+                        UpdatedBy = c.String(),
+                        ExpireTime = c.DateTime(nullable: false),
+                        Status = c.Boolean(nullable: false),
+                    })
+                .PrimaryKey(t => t.ID)
+                .ForeignKey("dbo.CustomerUsers", t => t.CustomerID, cascadeDelete: true)
+                .ForeignKey("dbo.Products", t => t.ProductID, cascadeDelete: true)
+                .Index(t => t.ProductID)
+                .Index(t => t.CustomerID);
+            
         }
         
         public override void Down()
         {
+            DropForeignKey("dbo.ProductCustomers", "ProductID", "dbo.Products");
+            DropForeignKey("dbo.ProductCustomers", "CustomerID", "dbo.CustomerUsers");
             DropForeignKey("dbo.OrderDetails", "ProductID", "dbo.Products");
             DropForeignKey("dbo.OrderDetails", "OrderID", "dbo.Orders");
             DropForeignKey("dbo.Orders", "CustomerID", "dbo.CustomerUsers");
@@ -151,6 +171,8 @@
             DropForeignKey("dbo.Products", "CategoryID", "dbo.ProductCategories");
             DropForeignKey("dbo.CartItems", "CartID", "dbo.Carts");
             DropForeignKey("dbo.Carts", "CustomerUserId", "dbo.CustomerUsers");
+            DropIndex("dbo.ProductCustomers", new[] { "CustomerID" });
+            DropIndex("dbo.ProductCustomers", new[] { "ProductID" });
             DropIndex("dbo.Orders", new[] { "CustomerID" });
             DropIndex("dbo.OrderDetails", new[] { "ProductID" });
             DropIndex("dbo.OrderDetails", new[] { "OrderID" });
@@ -158,6 +180,7 @@
             DropIndex("dbo.Carts", new[] { "CustomerUserId" });
             DropIndex("dbo.CartItems", new[] { "ProductID" });
             DropIndex("dbo.CartItems", new[] { "CartID" });
+            DropTable("dbo.ProductCustomers");
             DropTable("dbo.Orders");
             DropTable("dbo.OrderDetails");
             DropTable("dbo.ProductCategories");

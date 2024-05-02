@@ -144,11 +144,9 @@ namespace InsuranceOnline.Controllers
             }
             var cartDao = new CartDao();
             var cartItemDao = new CartItemDao();
-            var productDao = new ProductDao();
             var userSession = (UserLogin)Session[CommonConstants.USER_SESSION];
             var cart = cartDao.GetByUser(userSession.UserID);
             var listCartItem = new List<CartItem>();
-            var listProduct = new List<Product>();
             if (cart != null)
             {
                 listCartItem = cartItemDao.GetByCart(cart.Id);
@@ -188,30 +186,53 @@ namespace InsuranceOnline.Controllers
                     listCartItem = cartItemDao.GetByCart(cart.Id);
                 }
 
-                var order = new Order
-                {
-                    CustomerName = name,
-                    CustomerIdentity = identity,
-                    CustomerAddress = address,
-                    CustomerMobile = phone,
-                    CustomerEmail = email,
-                    CreatedDate = DateTime.Now,
-                    Status = true,
-                    CustomerID = (int)userSession.UserID,
-                    TotalPrice = listCartItem.Sum(x => x.Product.Price * x.Quantity),
-                    PaymentStatus = "Chờ xác nhận",
-                };
-                var orderId = new OrderDao().Insert(order);
+                bool check = false;
+                //Thêm vào bảng ProductCustomer
                 foreach (var item in listCartItem)
                 {
-                    var orderDetail = new OrderDetail
+                    var productCustomer = new ProductCustomer
                     {
-                        OrderID = orderId,
-                        ProductID = item.ProductID
+                        ProductID = item.ProductID,
+                        CustomerID = (int)userSession.UserID,
+                        CreatedDate = DateTime.Now,
+                        CreatedBy = userSession.UserName,
+                        Status = true
                     };
-                    new OrderDetailDao().Insert(orderDetail);
+                    check = new ProductCustomerDao().Insert(productCustomer);
                 }
-                cartDao.Delete(cart.Id);
+
+                if(check)
+                {
+                    var order = new Order
+                    {
+                        CustomerName = name,
+                        CustomerIdentity = identity,
+                        CustomerAddress = address,
+                        CustomerMobile = phone,
+                        CustomerEmail = email,
+                        CreatedDate = DateTime.Now,
+                        Status = true,
+                        CustomerID = (int)userSession.UserID,
+                        TotalPrice = listCartItem.Sum(x => x.Product.Price * x.Quantity),
+                        CreatedBy = userSession.UserName
+                    };
+                    var orderId = new OrderDao().Insert(order);
+                    foreach (var item in listCartItem)
+                    {
+                        var orderDetail = new OrderDetail
+                        {
+                            OrderID = orderId,
+                            ProductID = item.ProductID
+                        };
+                        new OrderDetailDao().Insert(orderDetail);
+                    }
+                    cartDao.Delete(cart.Id);
+                }
+                else
+                {
+                    return RedirectToAction("CheckoutError", "Cart");
+                }
+                
             }
             catch (Exception ex)
             {

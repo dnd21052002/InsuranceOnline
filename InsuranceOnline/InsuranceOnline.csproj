@@ -1432,6 +1432,7 @@
     <Content Include="Views\Cart\Checkout.cshtml" />
     <Content Include="Views\Cart\CheckoutSuccess.cshtml" />
     <Content Include="Views\Cart\CheckoutError.cshtml" />
+    <Content Include="Views\User\Infor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

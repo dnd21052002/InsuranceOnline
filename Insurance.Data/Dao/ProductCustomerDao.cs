@@ -31,7 +31,7 @@ namespace Insurance.Data.Dao
             return db.ProductCustomers.Where(x => x.ProductID == productId).ToList();
         }
 
-        public List<ProductCustomer> ListByCustomer(int customerId)
+        public List<ProductCustomer> ListByCustomer(long customerId)
         {
             return db.ProductCustomers.Where(x => x.CustomerID == customerId).ToList();
         }

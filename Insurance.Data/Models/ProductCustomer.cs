@@ -20,7 +20,7 @@ namespace Insurance.Data.Models
         public string CreatedBy { get; set; }
         public DateTime? UpdatedDate { get; set; }
         public string UpdatedBy { get; set; }
-        public DateTime ExpireTime { get; set; }
+        public DateTime? ExpireTime { get; set; }
 
         [ForeignKey("ProductID")]
         public virtual Product Product { get; set; }

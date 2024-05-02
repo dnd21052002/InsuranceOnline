@@ -129,5 +129,44 @@ namespace InsuranceOnline.Controllers
             Session[CommonConstants.USER_SESSION] = null;
             return Redirect("/");
         }
+
+        public ActionResult Infor()
+        {
+            var returnUrl1 = Request.Url.PathAndQuery;
+            if (returnUrl1.Contains("/dang-nhap"))
+            {
+                ViewBag.ReturnUrl = "";
+            }
+            else
+            {
+                ViewBag.ReturnUrl = returnUrl1;
+            }
+
+            if (Session[CommonConstants.USER_SESSION] == null)
+            {
+                return RedirectToAction("Login", "User", new { returnUrl = returnUrl1 });
+            }
+
+            var user = (UserLogin)Session[CommonConstants.USER_SESSION];
+            var productCusDao = new ProductCustomerDao();
+
+            var listProduct = productCusDao.ListByCustomer(user.UserID);
+
+            foreach (var item in listProduct)
+            {
+                var product = new ProductDao().ViewDetail(item.ProductID);
+                if (product.ExpireType == 0)
+                {
+                    item.ExpireTime = item.CreatedDate.AddMonths(product.ExpireTime);
+                }
+                else
+                {
+                    item.ExpireTime = item.CreatedDate.AddYears(product.ExpireTime);
+                }
+            }
+
+            return View(listProduct);
+
+        }
     }
 }
