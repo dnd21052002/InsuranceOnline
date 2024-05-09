@@ -1,0 +1,16 @@
+﻿@model IEnumerable<Insurance.Data.Models.ProductCategory>
+<div class="col-sm-3 col-md-3">
+    <div class="footer-item">
+        <div class="footer-title">
+            Các gói bảo hiểm
+        </div>
+
+
+        <ul class="list">
+            @foreach (var item in Model)
+            {
+                <li><a href="/bao-hiem/@item.Alias-@item.ID" title="">@item.Name</a></li>
+            }
+        </ul>
+    </div>
+</div>

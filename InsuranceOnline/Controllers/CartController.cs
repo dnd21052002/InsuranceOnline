@@ -7,6 +7,8 @@ using System.Web.Mvc;
 using Common;
 using InsuranceOnline.Common;
 using Insurance.Data.Models;
+using System.Configuration;
+using InsuranceOnline.Payment;
 
 namespace InsuranceOnline.Controllers
 {
@@ -226,6 +228,22 @@ namespace InsuranceOnline.Controllers
                         };
                         new OrderDetailDao().Insert(orderDetail);
                     }
+
+                    string vnp_Returnurl = ConfigurationManager.AppSettings["vnp_Returnurl"];
+                    string vnp_Url = ConfigurationManager.AppSettings["vnp_Url"];
+                    string vnp_TmnCode = ConfigurationManager.AppSettings["vnp_TmnCode"];
+                    string vnp_HashSecret = ConfigurationManager.AppSettings["vnp_HashSecret"];
+
+                    VnPayLibrary vnpay = new VnPayLibrary();
+                    var Price = (long)order.TotalPrice * 100;
+                    vnpay.AddRequestData("vnp_Version", VnPayLibrary.VERSION);
+                    vnpay.AddRequestData("vnp_Command", "pay");
+                    vnpay.AddRequestData("vnp_TmnCode", vnp_TmnCode);
+                    vnpay.AddRequestData("vnp_Amount", Price.ToString());
+
+
+
+
                     cartDao.Delete(cart.Id);
                 }
                 else

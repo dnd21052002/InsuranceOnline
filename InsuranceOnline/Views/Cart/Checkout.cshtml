@@ -15,7 +15,6 @@
                         <td>Loại bảo hiểm</td>
                         <td>Tên SP</td>
                         <td>Đơn giá</td>
-                        <td>#</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -26,15 +25,37 @@
                             <td class="align-top">@item.Product.ProductCategory.Name</td>
                             <td class="align-top">@item.Product.Name</td>
                             <td class="align-top">@item.Product.Price.ToString("N0") vnđ</td>
-                            <td><a href="#" class="btn-delete" data-id="@item.ID">Xoá</a></td>
                         </tr>
                     }
 
                 </tbody>
             </table>
 
-            <button id="btnContinue" class="btn btn-default">Tiếp tục mua hàng</button>
-            <button id="btnDeleteAll" class="btn btn-danger">Xoá giỏ hàng</button>
+            <btn class="btn btn-success" id="btn_paynow">Thanh toán ngay</btn>
+            <div id="payment_link" class="col-md-8 order-md-1 ms-3" style="display: none">
+                <div class="d-block my-3">
+                    <div class="custom-control custom-radio">
+                        <input class="form-check-input" id="bankcode_Default" type="radio" name="BankCode" value="bankcode_Default" checked="checked"><label for="bankcode_Default">Cổng thanh toán VNPAYQR</label><br>
+                    </div>
+                    <div class="custom-control custom-radio">
+                        <input class="form-check-input" id="bankcode_Vnpayqr" type="radio" name="BankCode" value="VNPAYQR"><label for="bankcode_Vnpayqr">Thanh toán qua ứng dụng hỗ trợ VNPAYQR</label><br>
+
+                    </div>
+                    <div class="custom-control custom-radio">
+                        <input class="form-check-input" id="bankcode_Vnbank" type="radio" name="BankCode" value="VNBANK"><label for="bankcode_Vnbank">ATM-Tài khoản ngân hàng nội địa</label><br>
+                    </div>
+                    <div class="custom-control custom-radio">
+                        <input class="form-check-input" id="bankcode_Intcard" type="radio" name="BankCode" value="INTCARD"><label for="bankcode_Intcard">Thanh toán qua thẻ quốc tế</label><br>
+                    </div>
+
+                    <p class="h5">Chọn ngôn ngữ thanh toán:</p>
+                    <div class="custom-control custom-radio">
+                        <input class="form-check-input" id="locale_Vn" type="radio" name="RadioGroup2" value="locale_Vn" checked="checked"><label for="locale_Vn">Tiếng việt</label><br>
+                        <input class="form-check-input" id="locale_En" type="radio" name="RadioGroup2" value="locale_En"><label for="locale_En">Tiếng anh</label><br>
+                    </div>
+                </div>
+                <button class="btn btn-success" id="btn_confirm">Xác nhận</button>
+            </div>
         }
         else
         {
@@ -42,34 +63,35 @@
         }
     </div>
 
-    @if(Model.Count > 0)
-    {
-        <div class="container">
-            @using (Html.BeginForm("Checkout", "Cart", FormMethod.Post))
-            {
-                <div class="form-group">
-                    <label>Người nhận</label>
-                    <input name="name" class="form-control" />
-                </div>
-                <div class="form-group">
-                    <label>Số CCCD/CMND</label>
-                    <input name="identity" class="form-control" />
-                </div>
-                <div class="form-group">
-                    <label>Điện thoại</label>
-                    <input name="phone" class="form-control" />
-                </div>
-                <div class="form-group">
-                    <label>Địa chỉ</label>
-                    <input name="address" class="form-control" />
-                </div>
-                <div class="form-group">
-                    <label>Email</label>
-                    <input name="email" class="form-control" />
-                </div>
-                <button type="submit" class="btn btn-success">Thanh toán</button>
-            }
-        </div>
-    }
+
+    @*@if (Model.Count > 0)
+        {
+            <div class="container">
+                @using (Html.BeginForm("Checkout", "Cart", FormMethod.Post))
+                {
+                    <div class="form-group">
+                        <label>Người nhận</label>
+                        <input name="name" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label>Số CCCD/CMND</label>
+                        <input name="identity" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label>Điện thoại</label>
+                        <input name="phone" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label>Địa chỉ</label>
+                        <input name="address" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input name="email" class="form-control" />
+                    </div>
+                    <button type="submit" class="btn btn-success">Thanh toán</button>
+                }
+            </div>
+        }*@
 </div>
 

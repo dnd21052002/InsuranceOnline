@@ -77,6 +77,11 @@
                 }
             });
         });
+        $('#btn_paynow').off('click').on('click', function () {
+            $('#payment_link').show();
+            $(this).hide();
+        });
+
     }
 }
 cart.init();
