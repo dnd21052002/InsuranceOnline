@@ -42,6 +42,12 @@ namespace InsuranceOnline
             );
 
             routes.MapRoute(
+                name: "Payment Response",
+                url: "ket-qua-thanh-toan",
+                defaults: new { controller = "Cart", action = "VnPayReturn", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
                 name: "Register",
                 url: "dang-ky",
                 defaults: new { controller = "User", action = "Register", id = UrlParameter.Optional },

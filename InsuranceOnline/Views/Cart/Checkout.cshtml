@@ -31,42 +31,7 @@
                 </tbody>
             </table>
 
-            <btn class="btn btn-success" id="btn_paynow">Thanh toán ngay</btn>
-            <div id="payment_link" class="col-md-8 order-md-1 ms-3" style="display: none">
-                <div class="d-block my-3">
-                    <div class="custom-control custom-radio">
-                        <input class="form-check-input" id="bankcode_Default" type="radio" name="BankCode" value="bankcode_Default" checked="checked"><label for="bankcode_Default">Cổng thanh toán VNPAYQR</label><br>
-                    </div>
-                    <div class="custom-control custom-radio">
-                        <input class="form-check-input" id="bankcode_Vnpayqr" type="radio" name="BankCode" value="VNPAYQR"><label for="bankcode_Vnpayqr">Thanh toán qua ứng dụng hỗ trợ VNPAYQR</label><br>
-
-                    </div>
-                    <div class="custom-control custom-radio">
-                        <input class="form-check-input" id="bankcode_Vnbank" type="radio" name="BankCode" value="VNBANK"><label for="bankcode_Vnbank">ATM-Tài khoản ngân hàng nội địa</label><br>
-                    </div>
-                    <div class="custom-control custom-radio">
-                        <input class="form-check-input" id="bankcode_Intcard" type="radio" name="BankCode" value="INTCARD"><label for="bankcode_Intcard">Thanh toán qua thẻ quốc tế</label><br>
-                    </div>
-
-                    <p class="h5">Chọn ngôn ngữ thanh toán:</p>
-                    <div class="custom-control custom-radio">
-                        <input class="form-check-input" id="locale_Vn" type="radio" name="RadioGroup2" value="locale_Vn" checked="checked"><label for="locale_Vn">Tiếng việt</label><br>
-                        <input class="form-check-input" id="locale_En" type="radio" name="RadioGroup2" value="locale_En"><label for="locale_En">Tiếng anh</label><br>
-                    </div>
-                </div>
-                <button class="btn btn-success" id="btn_confirm">Xác nhận</button>
-            </div>
-        }
-        else
-        {
-            <span class="alert alert-danger">Chưa có sản phẩm nào trong giỏ hàng</span>
-        }
-    </div>
-
-
-    @*@if (Model.Count > 0)
-        {
-            <div class="container">
+            <div>
                 @using (Html.BeginForm("Checkout", "Cart", FormMethod.Post))
                 {
                     <div class="form-group">
@@ -89,9 +54,40 @@
                         <label>Email</label>
                         <input name="email" class="form-control" />
                     </div>
-                    <button type="submit" class="btn btn-success">Thanh toán</button>
+                    <button type="button" class="btn btn-success" id="btn_paynow">Thanh toán ngay</button>
+
+                    <div id="payment_link" class="col-md-8 order-md-1 ms-3" style="display: none">
+                        <div class="d-block my-3">
+                            <div class="custom-control custom-radio">
+                                <input class="form-check-input" id="bankcode_Default" type="radio" name="BankCode" value="bankcode_Default" checked="checked"><label for="bankcode_Default">Cổng thanh toán VNPAYQR</label><br>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input class="form-check-input" id="bankcode_Vnpayqr" type="radio" name="BankCode" value="VNPAYQR"><label for="bankcode_Vnpayqr">Thanh toán qua ứng dụng hỗ trợ VNPAYQR</label><br>
+
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input class="form-check-input" id="bankcode_Vnbank" type="radio" name="BankCode" value="VNBANK"><label for="bankcode_Vnbank">ATM-Tài khoản ngân hàng nội địa</label><br>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input class="form-check-input" id="bankcode_Intcard" type="radio" name="BankCode" value="INTCARD"><label for="bankcode_Intcard">Thanh toán qua thẻ quốc tế</label><br>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-success" id="btn_confirm">Xác nhận</button>
+                    </div>
                 }
             </div>
-        }*@
+
+        }
+        else
+        {
+            <span class="alert alert-danger">Chưa có sản phẩm nào trong giỏ hàng</span>
+        }
+    </div>
+
+
+    @if (Model.Count > 0)
+    {
+
+    }
 </div>
 

@@ -1435,6 +1435,7 @@
     <Content Include="Views\Cart\CheckoutError.cshtml" />
     <Content Include="Views\User\Infor.cshtml" />
     <Content Include="Views\Home\ProductCatFooter.cshtml" />
+    <Content Include="Views\Cart\VnPayReturn.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

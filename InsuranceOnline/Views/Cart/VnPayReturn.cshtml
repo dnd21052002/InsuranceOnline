@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewBag.Title = "VnPayReturn";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="section">
+    <div class="container">
+        <div class="header clearfix">
+            <h3 class="fw-bold">Kết quả thanh toán</h3>
+        </div>
+        <div class="table-responsive">
+            <p class="h5 fw-bolder">@ViewBag.InnerText</p>
+        </div>
+        <div class="table-responsive">
+            <p>Mã Website (Terminal ID): @ViewBag.TerminalID</p>
+        </div>
+        <div class="table-responsive">
+            <p>Mã giao dịch thanh toán: @ViewBag.orderId</p>
+        </div>
+        <div class="table-responsive">
+            <p>Mã giao dịch tại VNPAY: @ViewBag.vnpayTranId</p>
+        </div>
+        <div class="table-responsive">
+            <p>Số tiền thanh toán (VND): @ViewBag.vnp_Amount</p>
+        </div>
+        <p>Ngân hàng thanh toán: @ViewBag.bankCode</p>
+
+        <a href="/" class="btn btn-primary">Quay lại trang chủ</a>
+    </div>
+</div>
+
