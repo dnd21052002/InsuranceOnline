@@ -49,28 +49,57 @@ namespace InsuranceOnline.Controllers
         [HttpPost]
         public JsonResult Add(int productId)
         {
-            var product = new ProductDao().ViewDetail(productId);
             if (Session[CommonConstants.USER_SESSION] != null)
             {
                 var userSession = (UserLogin)Session[CommonConstants.USER_SESSION];
-                var cart = new CartDao().GetByUser(userSession.UserID);
+                var cartDao = new CartDao();
+                var cart = cartDao.GetByUser(userSession.UserID);
+
                 if (cart == null)
                 {
+                    // Giỏ hàng chưa tồn tại, tạo giỏ hàng mới và thêm sản phẩm vào giỏ hàng đó
                     cart = new Cart
                     {
                         CustomerUserId = (int)userSession.UserID,
                         CreatedDate = DateTime.Now,
                         Status = true,
                     };
-                    new CartDao().Insert(cart);
+                    cartDao.Insert(cart);
+                    var cartItem = new CartItem
+                    {
+                        CartID = cart.Id,
+                        ProductID = productId,
+                        Quantity = 1
+                    };
+                    new CartItemDao().Insert(cartItem);
                 }
-                var cartItem = new CartItem
+                else
                 {
-                    CartID = cart.Id,
-                    ProductID = productId,
-                    Quantity = 1
-                };
-                new CartItemDao().Insert(cartItem);
+                    // Giỏ hàng đã tồn tại, kiểm tra xem sản phẩm đã có trong giỏ hàng chưa
+                    var cartItemDao = new CartItemDao();
+                    var existingCartItem = cartItemDao.GetByCartAndProduct(cart.Id, productId);
+
+                    if (existingCartItem != null)
+                    {
+                        return Json(new
+                        {
+                            status = false,
+                            exist = true
+                        });
+                    }
+                    else
+                    {
+                        // Sản phẩm chưa có trong giỏ hàng, thêm sản phẩm mới vào giỏ hàng
+                        var newCartItem = new CartItem
+                        {
+                            CartID = cart.Id,
+                            ProductID = productId,
+                            Quantity = 1
+                        };
+                        cartItemDao.Insert(newCartItem);
+                    }
+                }
+
                 return Json(new
                 {
                     status = true
@@ -84,6 +113,7 @@ namespace InsuranceOnline.Controllers
                 });
             }
         }
+
 
         [HttpPost]
         public JsonResult DeleteItem(int id)

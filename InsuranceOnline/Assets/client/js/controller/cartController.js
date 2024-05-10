@@ -18,6 +18,11 @@
                     if (res.status == true) {
                         alert('Thêm sản phẩm thành công');
                     }
+                    else if (res.status == false && res.exist == true) {
+                        alert('Sản phẩm đã có trong giỏ hàng');
+                    } else {
+                        alert('Có lỗi xảy ra');
+                    }
                 }
             })
         });
