@@ -148,12 +148,14 @@
     <Compile Include="Areas\Admin\Models\UserLogin.cs" />
     <Compile Include="Common\UserLogin.cs" />
     <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\ClaimController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ClaimViewModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Payment\VnPayLibrary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -1325,6 +1327,14 @@
     <Content Include="Assets\client\js\vendor\owl.carousel.js" />
     <Content Include="Assets\client\js\vendor\validator.min.js" />
     <Content Include="Assets\client\template\neworder.html" />
+    <Content Include="Data\images\9ec73e69-7843-4b69-a29d-295405de8ed1.jpg" />
+    <Content Include="Data\images\car-insurance.jpg" />
+    <Content Include="Data\images\foreseen-yasuo-lol-skin-splash-art-8k-wallpaper-uhdpaper_com-636%401%40n.jpg" />
+    <Content Include="Data\images\home-insurance.jpg" />
+    <Content Include="Data\images\jan-31-is-next-deadline-to-enroll-for-obamacare787x524-15675953121511744257074.jpg" />
+    <Content Include="Data\images\life-insurance.jpg" />
+    <Content Include="Data\images\service-img-1.jpg" />
+    <Content Include="Data\images\service-img-6.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Libs\CKFinder.dll" />
@@ -1436,13 +1446,15 @@
     <Content Include="Views\User\Infor.cshtml" />
     <Content Include="Views\Home\ProductCatFooter.cshtml" />
     <Content Include="Views\Cart\VnPayReturn.cshtml" />
+    <Content Include="Views\Claim\Create.cshtml" />
+    <Content Include="Views\Claim\Success.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Admin\Views\Base\" />
     <Folder Include="Areas\Admin\Views\OrderDetail\" />
-    <Folder Include="Data\" />
+    <Folder Include="Data\Claim\" />
     <Folder Include="Views\Default\" />
   </ItemGroup>
   <ItemGroup>

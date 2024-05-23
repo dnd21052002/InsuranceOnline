@@ -24,6 +24,8 @@ namespace Insurance.Data
         public DbSet<Order> Orders { set; get; }
         public DbSet<OrderDetail> OrderDetails { set; get; }
         public DbSet<ProductCustomer> ProductCustomers { set; get; }
+        public DbSet<Claim> Claims { get; set; }
+        public DbSet<ClaimDocument> ClaimDocuments { get; set; }
 
         public static InsuranceDbContext Create()
         {

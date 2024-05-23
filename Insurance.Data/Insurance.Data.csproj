@@ -46,6 +46,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -76,10 +77,16 @@
     <Compile Include="Migrations\202405020307327_updateProductCus.designer.cs">
       <DependentUpon>202405020307327_updateProductCus.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202405231607568_addClaim.cs" />
+    <Compile Include="Migrations\202405231607568_addClaim.Designer.cs">
+      <DependentUpon>202405231607568_addClaim.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AdminUser.cs" />
     <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\CartItem.cs" />
+    <Compile Include="Models\Claim.cs" />
+    <Compile Include="Models\ClaimDocument.cs" />
     <Compile Include="Models\CustomerUser.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderDetail.cs" />
@@ -107,6 +114,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202405020307327_updateProductCus.resx">
       <DependentUpon>202405020307327_updateProductCus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202405231607568_addClaim.resx">
+      <DependentUpon>202405231607568_addClaim.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

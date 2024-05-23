@@ -48,6 +48,12 @@ namespace InsuranceOnline
             );
 
             routes.MapRoute(
+                name: "Claim Create",
+                url: "khieu-nai-boi-thuong",
+                defaults: new { controller = "Claim", action = "Create", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
                 name: "Register",
                 url: "dang-ky",
                 defaults: new { controller = "User", action = "Register", id = UrlParameter.Optional },
