@@ -1,0 +1,67 @@
+﻿@model Insurance.Data.Models.Claim
+@{
+    ViewBag.Title = "Chi tiết đơn khiếu nại bồi thường";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section header{
+    Chi tiết đơn khiếu nại
+}
+
+<div class="container-fluid">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Họ tên</th>
+                <th>CMND/CCCD</th>
+                <th>Loại bảo hiểm</th>
+                <th>Ngày tạo</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Model.FullName</td>
+                <td>@Model.CitizenId</td>
+                <td>@Model.InsuranceName</td>
+                <td>@Model.CreatedDate</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Các file đính kèm</h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>File</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.ClaimDocuments)
+            {
+                <tr>
+                    <td>
+                        <a href="@item.FilePath" target="_blank">@item.FileName</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="d-flex">
+        @using (Html.BeginForm("Approve", "Claim", new { id = Model.Id }, FormMethod.Post))
+        {
+            <button type="submit" class="btn btn-success me-2">Duyệt đơn</button>
+        }
+
+        @using (Html.BeginForm("Reject", "Claim", new { id = Model.Id }, FormMethod.Post))
+        {
+            <button type="submit" class="btn btn-danger me-2">Từ chối</button>
+        }
+
+        <a href="#" onclick="history.back(); return false;" class="btn btn-primary me-2">Quay lại</a>
+    </div>
+
+    
+</div>
+
+

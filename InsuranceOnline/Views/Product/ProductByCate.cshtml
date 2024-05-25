@@ -87,7 +87,24 @@
 <!-- AGENT -->
 <div class="section testimony">
     <div class="container">
+        <style>
+            .box-image-1 .image img {
+                width: 100%;
+                height: 252px; /* Bạn có thể điều chỉnh chiều cao phù hợp */
+                object-fit: cover; /* Đảm bảo hình ảnh sẽ được cắt để vừa với khung */
+            }
 
+            .box-image-1 {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                height: 100%;
+            }
+
+                .box-image-1 .image {
+                    flex-grow: 1;
+                }
+        </style>
         <div class="row">
             <h3>Tham khảo các gói bảo hiểm khác</h3>
             @foreach (var item in listCate)

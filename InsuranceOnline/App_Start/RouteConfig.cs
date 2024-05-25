@@ -44,13 +44,15 @@ namespace InsuranceOnline
             routes.MapRoute(
                 name: "Payment Response",
                 url: "ket-qua-thanh-toan",
-                defaults: new { controller = "Cart", action = "VnPayReturn", id = UrlParameter.Optional }
+                defaults: new { controller = "Cart", action = "VnPayReturn", id = UrlParameter.Optional },
+                namespaces: new[] { "InsuranceOnline.Controllers" }
             );
 
             routes.MapRoute(
                 name: "Claim Create",
                 url: "khieu-nai-boi-thuong",
-                defaults: new { controller = "Claim", action = "Create", id = UrlParameter.Optional }
+                defaults: new { controller = "Claim", action = "Create", id = UrlParameter.Optional },
+                namespaces: new[] { "InsuranceOnline.Controllers" }
             );
 
             routes.MapRoute(

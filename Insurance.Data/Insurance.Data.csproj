@@ -81,6 +81,18 @@
     <Compile Include="Migrations\202405231607568_addClaim.Designer.cs">
       <DependentUpon>202405231607568_addClaim.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202405251619441_themUserIdClaim.cs" />
+    <Compile Include="Migrations\202405251619441_themUserIdClaim.Designer.cs">
+      <DependentUpon>202405251619441_themUserIdClaim.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202405251621272_changeStatusClaim.cs" />
+    <Compile Include="Migrations\202405251621272_changeStatusClaim.Designer.cs">
+      <DependentUpon>202405251621272_changeStatusClaim.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202405251949430_addDateClaim.cs" />
+    <Compile Include="Migrations\202405251949430_addDateClaim.Designer.cs">
+      <DependentUpon>202405251949430_addDateClaim.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AdminUser.cs" />
     <Compile Include="Models\Cart.cs" />
@@ -117,6 +129,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202405231607568_addClaim.resx">
       <DependentUpon>202405231607568_addClaim.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202405251619441_themUserIdClaim.resx">
+      <DependentUpon>202405251619441_themUserIdClaim.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202405251621272_changeStatusClaim.resx">
+      <DependentUpon>202405251621272_changeStatusClaim.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202405251949430_addDateClaim.resx">
+      <DependentUpon>202405251949430_addDateClaim.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

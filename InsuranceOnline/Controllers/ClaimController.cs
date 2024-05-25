@@ -47,13 +47,17 @@ namespace InsuranceOnline.Controllers
         {
             if (ModelState.IsValid)
             {
+                var user = (UserLogin)Session[CommonConstants.USER_SESSION];
                 var claim = new Claim
                 {
                     FullName = model.FullName,
                     CitizenId = model.CitizenId,
                     InsuranceId = model.SelectedInsuranceId,
                     InsuranceName = _context.ProductCategories.FirstOrDefault(x => x.ID == model.SelectedInsuranceId).Name,
-                    ClaimDocuments = new List<ClaimDocument>()
+                    ClaimDocuments = new List<ClaimDocument>(),
+                    Status = 0,
+                    UserId = user.UserID,
+                    CreatedDate = DateTime.Now
                 };
 
                 // Save claim to database
@@ -66,8 +70,9 @@ namespace InsuranceOnline.Controllers
                     if (file != null && file.ContentLength > 0)
                     {
                         var fileName = Path.GetFileName(file.FileName);
-                        var path = Path.Combine(Server.MapPath("~/Data/Claim"), fileName);
-                        file.SaveAs(path);
+                        var path = Path.Combine("/Data/Claim", fileName);
+                        var absolutePath = Server.MapPath(path);
+                        file.SaveAs(absolutePath);
 
                         var claimDocument = new ClaimDocument
                         {
@@ -94,12 +99,27 @@ namespace InsuranceOnline.Controllers
             var user = (UserLogin)Session[CommonConstants.USER_SESSION];
             var productCustomerDao = new ProductCustomerDao();
             var products = productCustomerDao.ListByCustomer(user.UserID);
-            return products.Select(x => new SelectListItem
+
+            var categories = new HashSet<int>();
+            var selectListItems = new List<SelectListItem>();
+
+            foreach (var productCustomer in products)
             {
-                Text = x.Product.ProductCategory.Name,
-                Value = x.Product.ProductCategory.ID.ToString()
-            }).ToList();
+                var categoryId = productCustomer.Product.ProductCategory.ID;
+                if (!categories.Contains(categoryId))
+                {
+                    categories.Add(categoryId);
+                    selectListItems.Add(new SelectListItem
+                    {
+                        Text = productCustomer.Product.ProductCategory.Name,
+                        Value = categoryId.ToString()
+                    });
+                }
+            }
+
+            return selectListItems;
         }
+
 
         public ActionResult Success()
         {

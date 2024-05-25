@@ -1,0 +1,56 @@
+﻿@model PagedList.PagedList<Insurance.Data.Models.Claim>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Danh sách đơn khiếu nại";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section header{
+    Danh sách đơn khiếu nại
+}
+
+<div class="card mb-4">
+    <div class="panel-body mt-3 ms-3">
+        <table id="datatablesSimple">
+            <thead>
+                <tr>
+                    <th>Họ tên</th>
+                    <th>CMND/CCCD</th>
+                    <th>Loại bảo hiểm</th>
+                    <th>Ngày tạo</th>
+                    <th>Trạng thái</th>
+                    <th style="width: 10%">Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr id="row_@item.Id">
+                        <td>@item.FullName</td>
+                        <td>@item.CitizenId</td>
+                        <td>@item.InsuranceName</td>
+                        <td>@item.CreatedDate</td>
+                        <td>
+                            @if (item.Status == 0)
+                            {
+                                <span class="badge bg-warning">Chờ xử lý</span>
+                            }
+                            else if (item.Status == 1)
+                            {
+                                <span class="badge bg-success">Đã duyệt</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-danger">Từ chối</span>
+                            }
+                        </td>
+                        <td>
+                            <a class="text-warning" href="/Admin/Claim/Details/@item.Id">Chi tiết</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+    </div>
+</div>

@@ -18,8 +18,11 @@ namespace Insurance.Data.Models
         public string FullName { get; set; }
         public string CitizenId { get; set; }
         public int InsuranceId { get; set; }
+        public long UserId { get; set; }
         public string InsuranceName { get; set; }
-        public bool Status { get; set; }
+        public int Status { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public DateTime? ApprovedDate { get; set; }
         public virtual ICollection<ClaimDocument> ClaimDocuments { get; set; }
 
     }
